@@ -25,8 +25,8 @@ import io.quarkus.grpc.runtime.annotations.GrpcService;
 @Path("/mkapp/rest/v1")
 public class CoreResource {
 
-//    @Inject
-    @GrpcService("hello")
+    @Inject
+    @GrpcService("mkmgrpc") // see  properties file
     SearchServiceGrpc.SearchServiceBlockingStub searchb;
 //    @Inject
 //    @GrpcService("mkmapiGrpcService")
@@ -38,9 +38,9 @@ public class CoreResource {
     @Path("person/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response personsAll() throws InvalidProtocolBufferException {
-//        MuniService.SearchPersonRes persons = MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll())
-//                .build();
-        MuniService.SearchPersonRes persons =searchb.personsAll(Empty.getDefaultInstance());
+        MuniService.SearchPersonRes persons = MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll())
+                .build();
+//        MuniService.SearchPersonRes persons =searchb.personsAll(Empty.getDefaultInstance());
 
 //        System.out.println("Person like:\n" + ProtoUtil.toJson(persons));
         System.out.println(persons.getPersonsList());

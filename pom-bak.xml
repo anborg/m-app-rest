@@ -127,7 +127,7 @@ public  static final class SearchResponse extends
           <artifactId>protobuf-maven-plugin</artifactId>
           <version>0.6.1</version>
           <configuration>
-<!--            <skip>true</skip>-->
+            <skip>true</skip>
             <useArgumentFile>false</useArgumentFile>
 <!--            <checkStaleness>true</checkStaleness>-->
             <protocArtifact>com.google.protobuf:protoc:3.13.0:exe:${os.detected.classifier}</protocArtifact>

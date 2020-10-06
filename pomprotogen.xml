@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>muni</groupId>
+  <artifactId>proto-gen</artifactId>
+  <version>1.0.0</version>
+    <!--
+        Enable PROTO plugiin only for the duration of regenerate
+
+        !! !! Remember to add these annotation back to GENERATED classes!! !! !! !!
+
+        @JsonSerialize(using = SerializerGeneric.class)
+        @JsonDeserialize(using = DeserializeSearchRequest.class)
+        public  static final class SearchRequest extends
+
+        @JsonSerialize(using = SerializerGeneric.class)
+        public  static final class SearchResponse extends
+    -->
+
+
+  <properties>
+    <quarkus.platform.version>1.8.1.Final</quarkus.platform.version>
+    <compiler-plugin.version>3.8.0</compiler-plugin.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-grpc</artifactId>
+      <version>${quarkus.platform.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.6.2</version>
+      </extension>
+    </extensions>
+    <plugins>
+
+
+      <plugin>
+        <groupId>org.xolstice.maven.plugins</groupId>
+        <artifactId>protobuf-maven-plugin</artifactId>
+        <version>0.6.1</version>
+        <configuration>
+          <!--            <skip>true</skip>-->
+          <useArgumentFile>false</useArgumentFile>
+          <!--            <checkStaleness>true</checkStaleness>-->
+          <protocArtifact>com.google.protobuf:protoc:3.13.0:exe:${os.detected.classifier}</protocArtifact>
+          <pluginId>grpc-java</pluginId>
+<!--          <protocExecutable>C:/apps/google/protoc-3.13.0/bin/protoc.exe</protocExecutable>-->
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.32.1:exe:${os.detected.classifier}</pluginArtifact>
+          <protoSourceRoot>${basedir}/schema/proto</protoSourceRoot>
+          <outputDirectory>${basedir}/src/zgen/proto/java-new</outputDirectory>
+          <clearOutputDirectory>false</clearOutputDirectory>
+<!--          <includes>-->
+<!--            <include>**/*.proto</include>-->
+<!--          </includes>-->
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-sources</id>
+            <goals>
+              <goal>compile</goal>
+              <goal>compile-custom</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>

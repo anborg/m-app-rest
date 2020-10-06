@@ -7,6 +7,7 @@ import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.PersonServiceGrpc;
 
+
 import javax.inject.Singleton;
 
 @Singleton
