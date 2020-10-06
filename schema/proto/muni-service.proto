@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "muni-model.proto";
+package muni.model; //find out how to make it work with "muni.service"
+
+//option java_outer_classname = "Model"; //muni.api.Model
+option java_generic_services = false; //default, prevents complex generic
+option java_multiple_files = false; //default behavior
+
+//Listed in the order of dependency
+message SearchPersonReq{
+  Person person =1;
+}
+message SearchPersonRes{
+  repeated  Person persons =1;
+}
+
+message CreatePersonReq{
+  Person person=1;
+}
+service PersonService{
+  // Creates a new shelf in the bookstore.
+  rpc create(CreatePersonReq) returns (Person) {
+    // Client example:
+    //   curl -d '{"id":"99", "firstName": "Bat". "lastName": "Man"}' http://localhost:8080/mkapp/v1/persons/create
+    option (google.api.http) = {
+      post: "/mkapp/v1/persons/create"
+      body: "person"
+    };
+  }
+}
+
+service SearchService{
+  // Returns a specific Person
+  // Client example - returns person id=1:
+  //   curl http://localhost:8080/mkapp/v1/person/1
+  rpc personById(SearchPersonReq) returns (SearchPersonRes){
+    option (google.api.http) = {
+      post: "/mkapp/v1/persons/byId"
+      body: "person"
+    };
+  }
+  rpc personsSimilar(SearchPersonReq) returns (SearchPersonRes){
+     option (google.api.http) = {
+       post: "/mkapp/v1/persons/similar"
+       body: "person"
+     };
+  };
+  rpc personsAll(google.protobuf.Empty) returns (SearchPersonRes){//google.protobuf.Empty
+     option (google.api.http) = { get: "/mkapp/v1/persons/all" };
+  };
+
+}

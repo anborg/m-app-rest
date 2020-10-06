@@ -1,0 +1,62 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package muni.model;
+
+option java_outer_classname = "Model"; //muni.api.Model
+option java_generic_services = false; //default, prevents complex generic
+option java_multiple_files = false; //default behavior
+//Listed in the order of dependency
+message PostalAddress{
+  string id=3;
+  string streetNum = 4;
+  string streetName =5;
+  string city = 6;
+  string province = 7;
+  string country = 8;
+  string postalCode=9;
+  double lat=10;//geo
+  double lon=11;
+  //
+  google.protobuf.Timestamp createTime = 1;
+  google.protobuf.Timestamp updateTime = 2;
+}
+
+message Person{
+  string id=3;
+  string firstName = 4;
+  string lastName= 5;
+  ContactChannels contactChannels = 8;
+  //
+  google.protobuf.Timestamp createTime = 1;
+  google.protobuf.Timestamp updateTime = 2;
+}
+
+message Organization {
+  string id = 3;
+  string name = 4;
+  ContactChannels contactChannels = 5;
+  string website = 6;
+  //
+  google.protobuf.Timestamp createTime = 1;
+  google.protobuf.Timestamp updateTime = 2;
+}
+
+message ContactChannels{ //aggregate, some may be in different tables in backend
+  Phone phone1 =1;
+  Phone phone2 =2;
+  Email email=3;
+  PostalAddress postalAddress=4;
+}
+
+message Phone{ // modeled separately to apply clean data rules
+  int32 countryCode=1;
+  int32 number=2;
+  string ext=3;
+}
+
+message Email{ // Modeled separately to apply clean data rules
+  string value=1;
+}
+
+
