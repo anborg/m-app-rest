@@ -9,7 +9,6 @@ import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.SearchServiceGrpc;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Objects;
 
@@ -26,7 +25,6 @@ public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
         MuniService.SearchPersonRes.Builder b = MuniService.SearchPersonRes.newBuilder();
         Model.Person res = repo.personById(id);
         MuniService.SearchPersonRes out = Objects.nonNull(res)? b.addPersons(res).build() : b.build();
-        //
         resObs.onNext(out);
         resObs.onCompleted();
     }
@@ -45,6 +43,4 @@ public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
         resObs.onNext(MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll()).build());
         resObs.onCompleted();
     }
-
-
 }

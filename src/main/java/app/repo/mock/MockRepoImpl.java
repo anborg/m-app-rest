@@ -37,9 +37,10 @@ public class MockRepoImpl implements CustomerRepo {
 
     @Override
     public Model.Person save(Model.Person person) {
-        String newId = ""+list.size();
+        String newId = ""+ (map.size()+1);
+        System.out.println("newId = " + newId);
         final Model.Person savePerson = Model.Person.newBuilder(person).setId(newId).build();
-        list.add(savePerson);
+        map.put(newId,savePerson);
         return savePerson;
     }
 }
