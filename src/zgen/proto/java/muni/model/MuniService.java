@@ -2090,16 +2090,14 @@ public final class MuniService {
       "\"\n\006person\030\001 \001(\0132\022.muni.model.Person2t\n\rP" +
       "ersonService\022c\n\006create\022\033.muni.model.Crea" +
       "tePersonReq\032\022.muni.model.Person\"(\202\323\344\223\002\"\"" +
-      "\030/mkapp/v1/persons/create:\006person2\330\002\n\rSe" +
-      "archService\022n\n\npersonById\022\033.muni.model.S" +
+      "\030/mkapp/v1/persons/create:\006person2\211\002\n\rSe" +
+      "archService\022H\n\npersonById\022\033.muni.model.S" +
       "earchPersonReq\032\033.muni.model.SearchPerson" +
-      "Res\"&\202\323\344\223\002 \"\026/mkapp/v1/persons/byId:\006per" +
-      "son\022u\n\016personsSimilar\022\033.muni.model.Searc" +
-      "hPersonReq\032\033.muni.model.SearchPersonRes\"" +
-      ")\202\323\344\223\002#\"\031/mkapp/v1/persons/similar:\006pers" +
-      "on\022`\n\npersonsAll\022\026.google.protobuf.Empty" +
-      "\032\033.muni.model.SearchPersonRes\"\035\202\323\344\223\002\027\022\025/" +
-      "mkapp/v1/persons/allB\005P\000\210\001\000b\006proto3"
+      "Res\"\000\022L\n\016personsSimilar\022\033.muni.model.Sea" +
+      "rchPersonReq\032\033.muni.model.SearchPersonRe" +
+      "s\"\000\022`\n\npersonsAll\022\026.google.protobuf.Empt" +
+      "y\032\033.muni.model.SearchPersonRes\"\035\202\323\344\223\002\027\022\025" +
+      "/mkapp/v1/persons/allB\005P\000\210\001\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

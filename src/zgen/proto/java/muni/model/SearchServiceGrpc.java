@@ -181,6 +181,12 @@ public final class SearchServiceGrpc {
     }
 
     /**
+     * <pre>
+     *     option (google.api.http) = {
+     *       post: "/mkapp/v1/persons/similar"
+     *       body: "person"
+     *     };
+     * </pre>
      */
     public void personsSimilar(muni.model.MuniService.SearchPersonReq request,
         io.grpc.stub.StreamObserver<muni.model.MuniService.SearchPersonRes> responseObserver) {
@@ -252,6 +258,12 @@ public final class SearchServiceGrpc {
     }
 
     /**
+     * <pre>
+     *     option (google.api.http) = {
+     *       post: "/mkapp/v1/persons/similar"
+     *       body: "person"
+     *     };
+     * </pre>
      */
     public void personsSimilar(muni.model.MuniService.SearchPersonReq request,
         io.grpc.stub.StreamObserver<muni.model.MuniService.SearchPersonRes> responseObserver) {
@@ -298,6 +310,12 @@ public final class SearchServiceGrpc {
     }
 
     /**
+     * <pre>
+     *     option (google.api.http) = {
+     *       post: "/mkapp/v1/persons/similar"
+     *       body: "person"
+     *     };
+     * </pre>
      */
     public muni.model.MuniService.SearchPersonRes personsSimilar(muni.model.MuniService.SearchPersonReq request) {
       return blockingUnaryCall(
@@ -343,6 +361,12 @@ public final class SearchServiceGrpc {
     }
 
     /**
+     * <pre>
+     *     option (google.api.http) = {
+     *       post: "/mkapp/v1/persons/similar"
+     *       body: "person"
+     *     };
+     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<muni.model.MuniService.SearchPersonRes> personsSimilar(
         muni.model.MuniService.SearchPersonReq request) {

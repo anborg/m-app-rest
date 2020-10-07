@@ -38,9 +38,9 @@ public class CoreResource {
     @Path("person/all")
     @Produces(MediaType.APPLICATION_JSON)
     public Response personsAll() throws InvalidProtocolBufferException {
-        MuniService.SearchPersonRes persons = MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll())
-                .build();
-//        MuniService.SearchPersonRes persons =searchb.personsAll(Empty.getDefaultInstance());
+//        MuniService.SearchPersonRes persons = MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll())
+//                .build();
+        MuniService.SearchPersonRes persons =searchb.personsAll(Empty.getDefaultInstance());
 
 //        System.out.println("Person like:\n" + ProtoUtil.toJson(persons));
         System.out.println(persons.getPersonsList());
@@ -50,8 +50,8 @@ public class CoreResource {
 
     @POST
     @Path("person/similar")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response personSimilar(MuniService.SearchPersonReq req) throws InvalidProtocolBufferException {
         System.out.println("Person like req="+ req);
         Model.Person person = MockUtil.buildPerson();

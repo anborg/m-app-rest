@@ -11,6 +11,7 @@ import muni.model.SearchServiceGrpc;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.Objects;
 
 @Singleton
 public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
@@ -19,17 +20,19 @@ public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
 
     @Override
     public void personById(MuniService.SearchPersonReq req, StreamObserver<MuniService.SearchPersonRes> resObs) {
-        super.personById(req, resObs);
-        System.out.println(req);
-        String id = req.getPerson().getId();
-        resObs.onNext(MuniService.SearchPersonRes.newBuilder().addPersons(repo.personById(id)).build());
 
+        System.out.println("Search.personById " + req);
+        String id = req.getPerson().getId();
+        MuniService.SearchPersonRes.Builder b = MuniService.SearchPersonRes.newBuilder();
+        Model.Person res = repo.personById(id);
+        MuniService.SearchPersonRes out = Objects.nonNull(res)? b.addPersons(res).build() : b.build();
+        //
+        resObs.onNext(out);
         resObs.onCompleted();
     }
 
     @Override
     public void personsSimilar(MuniService.SearchPersonReq req, StreamObserver<MuniService.SearchPersonRes> resObs) {
-        super.personsSimilar(req, resObs);
         System.out.println(req);
         resObs.onNext(MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll()).build());
         resObs.onCompleted();
@@ -38,9 +41,10 @@ public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
 
     @Override
     public void personsAll(Empty req, StreamObserver<MuniService.SearchPersonRes> resObs) {
-        super.personsAll(req, resObs);
         System.out.println(req);
         resObs.onNext(MuniService.SearchPersonRes.newBuilder().addAllPersons(repo.personAll()).build());
         resObs.onCompleted();
     }
+
+
 }

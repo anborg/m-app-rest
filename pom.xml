@@ -107,55 +107,6 @@
         </executions>
       </plugin>
 
-
-      <!--
-Enable PROTO plugiin only for the duration of regenerate
-
-!! !! Remember to add these annotation back to GENERATED classes!! !! !! !!
-
-@JsonSerialize(using = SerializerGeneric.class)
-@JsonDeserialize(using = DeserializeSearchRequest.class)
-public  static final class SearchRequest extends
-
-
-@JsonSerialize(using = SerializerGeneric.class)
-public  static final class SearchResponse extends
-
--->
-        <plugin>
-          <groupId>org.xolstice.maven.plugins</groupId>
-          <artifactId>protobuf-maven-plugin</artifactId>
-          <version>0.6.1</version>
-          <configuration>
-<!--            <skip>true</skip>-->
-            <useArgumentFile>false</useArgumentFile>
-<!--            <checkStaleness>true</checkStaleness>-->
-            <protocArtifact>com.google.protobuf:protoc:3.13.0:exe:${os.detected.classifier}</protocArtifact>
-            <pluginId>grpc-java</pluginId>
-            <protocExecutable>C:/apps/google/protoc-3.13.0/bin/protoc.exe</protocExecutable>
-            <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.32.1:exe:${os.detected.classifier}</pluginArtifact>
-            <protoSourceRoot>${basedir}/schema/proto</protoSourceRoot>
-            <outputDirectory>${basedir}/src/zgen/proto/java</outputDirectory>
-            <clearOutputDirectory>false</clearOutputDirectory>
-            <includes>
-              <include>**/*.proto</include>
-            </includes>
-          </configuration>
-          <executions>
-            <execution>
-              <id>generate-sources</id>
-              <goals>
-                <goal>compile</goal>
-                <goal>compile-custom</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
-
-
-
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
