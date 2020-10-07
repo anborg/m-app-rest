@@ -1,6 +1,5 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/field_mask.proto";
 package muni.model;
 
 option java_outer_classname = "Model"; //muni.api.Model

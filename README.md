@@ -41,3 +41,9 @@ protoc
 
 //-I%GOPATH%\src
 protoc -IC:\dev\bin\protoc-3.5.1\include -I.  -I%GOPATH%\src\github.com\grpc-ecosystem\grpc-gateway\third_party\googleapis --go_out=plugins=grpc:. .\my-proto\my-service.proto
+
+
+
+
+mvn -f pomprotogen.xml generate-resources
+mvn quarkus:dev

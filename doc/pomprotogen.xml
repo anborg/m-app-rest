@@ -6,6 +6,7 @@
   <groupId>muni</groupId>
   <artifactId>proto-gen</artifactId>
   <version>1.0.0</version>
+  <packaging>jar</packaging>
     <!--
         Enable PROTO plugiin only for the duration of regenerate
 
@@ -21,28 +22,52 @@
 
 
   <properties>
+    <protoc.version>3.13.0</protoc.version>
+    <protobuf.version>3.11.1</protobuf.version>
+    <!--Import "google/api/annotations.proto" was not found -->
     <quarkus.platform.version>1.8.1.Final</quarkus.platform.version>
+
     <compiler-plugin.version>3.8.0</compiler-plugin.version>
+
+
+    <!-- jdk -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>11</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
   </properties>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.quarkus</groupId>
-        <artifactId>quarkus-bom</artifactId>
-        <version>${quarkus.platform.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+<!--  <dependencyManagement>-->
+<!--    <dependencies>-->
+<!--      <dependency>-->
+<!--        <groupId>io.quarkus</groupId>-->
+<!--        <artifactId>quarkus-bom</artifactId>-->
+<!--        <version>${quarkus.platform.version}</version>-->
+<!--        <scope>import</scope>-->
+<!--        <type>pom</type>-->
+<!--      </dependency>-->
+<!--    </dependencies>-->
+<!--  </dependencyManagement>-->
+
   <dependencies>
+    <!--Import "google/api/annotations.proto" was not found -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-grpc</artifactId>
       <version>${quarkus.platform.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java</artifactId>
+      <version>${protobuf.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.protobuf</groupId>
+      <artifactId>protobuf-java-util</artifactId>
+      <version>${protobuf.version}</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
 

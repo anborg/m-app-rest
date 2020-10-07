@@ -45,9 +45,9 @@ service SearchService{
   // Client example - returns person id=1:
 //   curl http://localhost:8080//mkapp/v1/persons/byId
   rpc personById(SearchPersonReq) returns (SearchPersonRes){
-    option (google.api.http) = {
-      post: "/mkapp/v1/persons/byId"
-      body: "*"
+    option (google.api.http) = {//byId
+      post: "/mkapp/v1/persons/{person.id}}"
+      body: "person"
     };
   }
   rpc personsSimilar(SearchPersonReq) returns (SearchPersonRes){
@@ -57,7 +57,9 @@ service SearchService{
      };
   };
   rpc personsAll(google.protobuf.Empty) returns (SearchPersonRes){//google.protobuf.Empty
-     option (google.api.http) = { get: "/mkapp/v1/persons/all" };
+     option (google.api.http) = {
+       get: "/mkapp/v1/persons/all"
+     };
   };
 
 }
