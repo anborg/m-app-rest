@@ -1,0 +1,27 @@
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+2020-10-07 01:07:49,275 WARN  [io.qua.dep.ste.ReflectiveHierarchyStep] (build-40) Unable to properly register the hierarchy of the following classes for reflection as they are not in the Jandex inde
+x:
+        - com.google.protobuf.AbstractMessage$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.AbstractMessageLite$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.ByteString (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Descriptors$Descriptor (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.FieldMask (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.FieldMask$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.FieldMaskOrBuilder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.GeneratedMessageV3 (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.GeneratedMessageV3$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.GeneratedMessageV3$FieldAccessorTable (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Message (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Message$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.MessageLite (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.MessageLite$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Parser (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.RepeatedFieldBuilderV3 (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.SingleFieldBuilderV3 (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Timestamp (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.Timestamp$Builder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.TimestampOrBuilder (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+        - com.google.protobuf.UnknownFieldSet (source: JacksonProcessor > muni.model.MuniService$CreatePersonReq)
+Consider adding them to the index either by creating a Jandex index for your dependency via the Maven plugin, an empty META-INF/beans.xml or quarkus.index-dependency properties.");.
+2020-10-07 01:07:50,531 INFO  [io.qua.grp.run.GrpcServerRecorder] (Quarkus Main Thread) Registering gRPC reflection service

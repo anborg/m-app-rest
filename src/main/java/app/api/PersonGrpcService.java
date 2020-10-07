@@ -1,4 +1,4 @@
-package app.grpc;
+package app.api;
 
 import app.repo.CustomerRepo;
 import app.repo.mock.MockRepoImpl;

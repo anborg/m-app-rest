@@ -4,17 +4,29 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.google.protobuf.Message;
+//import com.google.protobuf.util.JsonFormat;
+import com.google.protobuf.Parser;
 import com.google.protobuf.util.JsonFormat;
+import muni.util.ProtoUtil;
 
 import java.io.IOException;
 
 public  class SerializerGeneric extends JsonSerializer<Message> {
     @Override
     public void serialize(Message message, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-      //gen.writeString(JsonFormat.printer().print(message));
-      gen.writeRawValue(JsonFormat.printer().print(message));
+        System.out.println("In Serialize = " + message);
+//        String json = "";
+//        JsonFormat.Parser p =JsonFormat.parser();
+//        p.merge(json, message.toBuilder());
+//        System.out.println("To Json String = " + json);
+////        gen.writeString(json);
+        gen.writeRawValue(JsonFormat.printer().print(message));
     }
   }
+
+  /*
+  InvalidDefinitionException: Direct self-reference leading to cycle (through reference chain: muni.model.MuniService$SearchPersonRes["unknownFields"]->com.google.protobuf.UnknownFieldSet
+ */
 
   /*
   Hack.

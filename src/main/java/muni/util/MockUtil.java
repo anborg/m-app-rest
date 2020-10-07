@@ -1,6 +1,7 @@
 package muni.util;
 
 import com.google.protobuf.Timestamp;
+import com.google.protobuf.util.Timestamps;
 import muni.model.Model;
 
 import java.time.Instant;
@@ -17,7 +18,16 @@ public class MockUtil {
         return  buildPerson("99","Jane", "Doe");
     }
     public static Model.Person buildPerson(String id, String firstName, String lastname ) {
-        return Model.Person.newBuilder().setId(id).setFirstName(firstName).setLastName(lastname).setContactChannels(buildContactChannels()).build();
+
+        Timestamp ts = Timestamps.fromMillis(System.currentTimeMillis());
+
+        return Model.Person.newBuilder().setId(id)
+                .setFirstName(firstName)
+                .setLastName(lastname)
+                .setContactChannels(buildContactChannels())
+                .setCreateTime(ts)
+                .setUpdateTime(ts)
+                .build();
     }
 
 

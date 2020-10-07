@@ -1,4 +1,4 @@
-package app.grpc;
+package app.api;
 
 import app.repo.CustomerRepo;
 import app.repo.mock.MockRepoImpl;
@@ -19,7 +19,6 @@ public class SearchGrpcService extends SearchServiceGrpc.SearchServiceImplBase {
 
     @Override
     public void personById(MuniService.SearchPersonReq req, StreamObserver<MuniService.SearchPersonRes> resObs) {
-
         System.out.println("Search.personById " + req);
         String id = req.getPerson().getId();
         MuniService.SearchPersonRes.Builder b = MuniService.SearchPersonRes.newBuilder();

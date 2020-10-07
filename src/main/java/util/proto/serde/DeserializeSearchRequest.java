@@ -6,8 +6,10 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import muni.model.MuniService;
 import muni.util.ProtoUtil;
-import java.io.IOException;
 
+import javax.inject.Singleton;
+import java.io.IOException;
+@Singleton
 public class DeserializeSearchRequest extends JsonDeserializer<MuniService.SearchPersonReq> {
     @Override
     public MuniService.SearchPersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

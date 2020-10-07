@@ -1,6 +1,6 @@
 syntax = "proto3";
 import "google/protobuf/timestamp.proto";
-
+import "google/protobuf/field_mask.proto";
 package muni.model;
 
 option java_outer_classname = "Model"; //muni.api.Model
@@ -17,28 +17,33 @@ message PostalAddress{
   string postalCode=9;
   double lat=10;//geo
   double lon=11;
-  //
+  //Output only
   google.protobuf.Timestamp createTime = 1;
+  //Output only
   google.protobuf.Timestamp updateTime = 2;
 }
 
 message Person{
+  //Output only
   string id=3;
   string firstName = 4;
   string lastName= 5;
   ContactChannels contactChannels = 8;
-  //
+  //Output only
   google.protobuf.Timestamp createTime = 1;
+  //Output only
   google.protobuf.Timestamp updateTime = 2;
 }
 
 message Organization {
+  //Output only
   string id = 3;
   string name = 4;
   ContactChannels contactChannels = 5;
   string website = 6;
-  //
+  //Output only
   google.protobuf.Timestamp createTime = 1;
+  //Output only
   google.protobuf.Timestamp updateTime = 2;
 }
 

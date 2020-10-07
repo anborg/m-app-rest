@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="1d9cf050-1a6d-4147-a73b-9eb587fab7f7" activeEnvironment="Default" name="spring-rest-proto" soapui-version="5.5.0" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" xmlns:con="http://eviware.com/soapui/config">
+  <con:settings/>
+  
+  <con:interface xsi:type="con:RestService" id="a4c82928-3221-45f5-9933-8371445f6c11" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080/webflux" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache/>
+    <con:endpoints>
+      <con:endpoint>http://localhost:8080</con:endpoint>
+    </con:endpoints>
+    <con:resource name="all_customers" path="/customers/all" id="29a30195-f828-434d-a195-43beb15312f2">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="GET" id="a6dfef74-8ee8-4ccf-b900-87facfb4a8be" method="GET">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>500</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://localhost/webflux/customers">cus:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://localhost/webflux/customers">cus:Response</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType xsi:nil="true"/>
+          <con:status>0</con:status>
+          <con:params/>
+          <con:element>data</con:element>
+        </con:representation>
+        <con:request name="allcustomers" id="f0a3c4d6-3784-4c64-878e-e73453ffbd1f" mediaType="application/json">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:8080/webflux</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://localhost/webflux/customers</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+    <con:resource name="customers" path="/customers/similar" id="9b256409-40b3-42e2-81d0-98a9f5772c51">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="POST" id="d903f2ea-39da-4bd5-a35b-d363fb7007c3" method="POST">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="REQUEST">
+          <con:mediaType>application/json</con:mediaType>
+          <con:params/>
+        </con:representation>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>500</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://localhost/webflux/find/customers">cus:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://localhost/webflux/find/customers">cus:Response</con:element>
+        </con:representation>
+        <con:request name="customers_similar" id="1460f489-825e-4f21-bed1-5b6d704f413d" mediaType="application/json" postQueryString="false">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:8080/webflux</con:endpoint>
+          <con:request>{
+            "customerLike": {
+            "phone": "4165612642"
+            }
+            }
+          </con:request>
+          <con:originalUri>http://localhost/webflux/find/customers</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+    <con:resource name="1000007967" path="/customer/1000007967" id="796b2550-1226-4b44-ba0b-0c219fdce959">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="GET" id="b3c88d16-8c84-4dae-8136-43bcd624f7b2" method="GET">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:ns="http://localhost/webflux/find/customer/1000007967">ns:Response</con:element>
+        </con:representation>
+        <con:request name="customer_by_id" id="aaf99760-00e1-41f8-a454-87e3316da91f" mediaType="application/json">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:8080/webflux</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://localhost/webflux/find/customer/1000007967</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+    <con:resource name="customer_events" path="/customer/1000007967/events" id="796b2550-1226-4b44-ba0b-0c219fdce959">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="STREAM" id="b3c88d16-8c84-4dae-8136-43bcd624f7b2" method="GET">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:ns="http://localhost/webflux/find/customer/1000007967">ns:Response</con:element>
+        </con:representation>
+        <con:request name="customer_events" id="aaf99760-00e1-41f8-a454-87e3316da91f" mediaType="application/json">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://localhost:8080/webflux</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://localhost/webflux/find/customer/1000007967</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:interface xsi:type="con:RestService" id="79b32092-a42b-4fc1-8138-c273c3a776c9" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://wdnvmhba710:8080/webflux" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:settings/>
+    <con:definitionCache/>
+    <con:endpoints>
+      <con:endpoint>http://wdnvmhba710:8080</con:endpoint>
+    </con:endpoints>
+    <con:resource name="customers" path="/customers" id="7b292b0b-0587-4f3d-8294-c6758babcc01">
+      <con:settings/>
+      <con:parameters/>
+      <con:method name="customers_all" id="865f7213-9446-4412-b86b-374bf9046eca" method="GET">
+        <con:settings/>
+        <con:parameters/>
+        <con:representation type="FAULT">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>404</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://wdnvmhba710/customers">cus:Fault</con:element>
+        </con:representation>
+        <con:representation type="RESPONSE">
+          <con:mediaType>application/json</con:mediaType>
+          <con:status>200</con:status>
+          <con:params/>
+          <con:element xmlns:cus="http://wdnvmhba710/customers">cus:Response</con:element>
+        </con:representation>
+        <con:request name="Request 1" id="0e79f4e2-6326-40c5-a4d0-3c1dcab2ec1d" mediaType="application/json">
+          <con:settings>
+            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+          </con:settings>
+          <con:endpoint>http://wdnvmhba710:8080/webflux</con:endpoint>
+          <con:request/>
+          <con:originalUri>http://wdnvmhba710/customers</con:originalUri>
+          <con:credentials>
+            <con:authType>No Authorization</con:authType>
+          </con:credentials>
+          <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+          <con:jmsPropertyConfig/>
+          <con:parameters/>
+        </con:request>
+      </con:method>
+    </con:resource>
+  </con:interface>
+  <con:interface xsi:type="con:RestService" id="5af21e17-6f7c-4e72-942e-5c8cfe33e01d" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://wdnvmhba710:8080" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://wdnvmhba710:8080</con:endpoint></con:endpoints><con:resource name="V1" path="/mkap/rest/api/v1/" id="2ff0e5e4-459b-420c-a75c-9b6be9324a05"><con:settings/><con:parameters/><con:resource name="similar" path="customers/similar" id="9d47853d-8d37-4758-b75f-77eb3545abd8"><con:settings/><con:parameters/><con:method name="POST" id="ed4fc476-586e-40ba-8ecc-9fbd02e484ea" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sim="http://wdnvmhba710/mkap/rest/api/v1/customers/similar">sim:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="customers_similar_phone_4165612642" id="c3e6e565-d51d-412a-956c-6cd0e27e5958" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://wdnvmhba710:8080</con:endpoint><con:request>{
+	"customerLike": {
+     "phone": "4165612642"
+     }
+}</con:request><con:originalUri>http://wdnvmhba710/mkap/rest/api/v1/customers/similar</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="byId" path="customer/1000007967" id="20a7fffa-4552-4b97-ae46-0f9784e1bdf6"><con:settings/><con:parameters/><con:method name="Method 1" id="8aff01cf-4162-40c7-82ee-4c2c3504c100" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>415</con:status><con:params/><con:element xmlns:ns="http://wdnvmhba710/mkap/rest/api/v1/customer/1000007967">ns:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ns="http://wdnvmhba710/mkap/rest/api/v1/customer/1000007967">ns:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="by_id_1000007967" id="42734a8a-f2b4-46b8-9bbb-073ce5a1413c" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/json" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://wdnvmhba710:8080</con:endpoint><con:request/><con:originalUri>http://wdnvmhba710/mkap/rest/api/v1/customer/1000007967</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="customers" path="customers" id="2c71a7c8-57e5-4d1a-972d-0e9585f84967"><con:settings/><con:parameters/><con:method name="Method 1" id="deed0f09-cb7c-4f53-b91b-c7ffe72427de" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>415</con:status><con:params/><con:element xmlns:cus="http://wdnvmhba710/mkap/rest/api/v1/customers">cus:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:cus="http://wdnvmhba710/mkap/rest/api/v1/customers">cus:Response</con:element></con:representation><con:request name="Request 1" id="08ba66b2-732d-4327-b634-46e866a7b3c3" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Content-Type" value="application/json" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://wdnvmhba710:8080</con:endpoint><con:request/><con:originalUri>http://wdnvmhba710/mkap/rest/api/v1/customers</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource></con:interface><con:interface xsi:type="con:RestService" id="2d69ae9b-e7de-4c37-bfa4-0ba081f5d6a9" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="V1" path="/mkapp/v1/" id="4cad9f21-d27f-4a00-86fb-f1b54ff4f529"><con:settings/><con:parameters/><con:resource name="person" path="person" id="1525a310-43e7-4cb7-925a-fd5c1574b23a"><con:settings/><con:parameters/><con:resource name="all" path="all" id="ea437c99-c041-409c-98df-277429631e9d"><con:settings/><con:parameters/><con:method name="get" id="48e79774-2e9b-4061-ae4f-538e117ded2a" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:all="http://localhost/mkapp/v1/person/all">all:Response</con:element></con:representation><con:request name="all-persons" id="26e7d12f-9fc7-44f1-a747-d29425c25e48" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/mkapp/v1/person/all</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="similar" path="similar" id="915252eb-d3cd-481b-8083-f5767dbf16b7"><con:settings/><con:parameters/><con:method name="Method 1" id="ed27c700-9d58-42bf-8122-02e6b2e94e1e" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>*/*</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>406</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/plain</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>406</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="e208d172-8448-4a4a-9ad1-0ba4017a71c4" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="text/plain" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+  "person": {
+    "id": "1"
+  }
+}</con:request><con:originalUri>http://localhost/mkapp/v1/person/similar</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="search-person-like" id="3c5b77fc-6d29-445e-8225-dead2b7e45ed" method="POST"><con:settings/><con:parameters/><con:request name="Request 1" id="73de1507-5805-4fa7-bf60-fc477271c24f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+  "personLike": {
+    "id": "79d87572-6b60-4662-99dc-dcc62328babd",
+    "firstName": "Hello",
+    "lastName": "Hello",
+  }
+}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="byId" path="persons/byId" id="e933d5d3-d5af-4192-9923-fa3d84a96a10"><con:settings/><con:parameters><con:parameter><con:name>person</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="e2741b91-ba55-4c48-956d-abc862ee8d93" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/protobuf</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/x-protobuf</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/plain</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="42f9e9da-a8c3-45dc-9aab-50e01ce709d0" mediaType="multipart/form-data" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="Accept" value="application/x-protobuf,applicaation/json"/>
+  &lt;con:entry key="Content-Type" value="text/plain"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+  "person": {
+    "id": "1"
+  }
+}</con:request><con:originalUri>http://localhost/mkapp/v1/persons/byId</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="person" value="{   &quot;person&quot;: {     &quot;id&quot;: &quot;1&quot;   } }" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>person</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:resource><con:resource name="v1" path="/mkapp/rest/v1" id="ec9545c1-972f-4976-a5fa-08dd07211061"><con:settings/><con:parameters/><con:resource name="person" path="person" id="661d11e6-be6c-49f7-8a0a-0e7f538be193"><con:settings/><con:parameters/><con:resource name="all" path="all" id="493caa87-dd44-4b9e-b9f3-e898023690b2"><con:settings/><con:parameters/><con:method name="Method 1" id="2e5c40ca-efc9-44c2-9cb8-288a5f8ab1f4" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:all="http://localhost/mkapp/rest/v1/person/all">all:Response</con:element></con:representation><con:request name="Request 1" id="3eea5054-7315-4a88-b63a-ec11de1318ae" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/mkapp/rest/v1/person/all</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="similar" path="similar" id="68dbcfe3-49ab-40ec-8465-dc4ad0ecef76"><con:settings/><con:parameters/><con:method name="get-person-similar" id="7c846a16-cf52-4280-85b9-9432cc6f900b" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="person-id-1" id="fab9f916-205c-417b-be2b-8f5c76373875" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
+  "person": {
+    "id": "1"
+  }
+}</con:request><con:originalUri>http://localhost/mkapp/rest/v1/person/similar</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource></con:resource></con:interface><con:testSuite id="737a9370-edad-4166-9752-f1e08cc01205" name="TestSuite - json">
+    <con:description>TestSuite generated for REST Service [http://localhost:8080]</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="c38a8a47-c99f-48a7-9a11-42665fb33fe5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customers_findLike TestCase" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [Customers_findLike] located at [/find/customers]
+      </con:description>
+      <con:settings/>
+      
+      <con:loadTest id="b2927b19-d482-46cb-91cc-75a8dbe013ff" name="LoadTest 1">
+        <con:settings>
+          <con:setting id="HttpSettings@close-connections">false</con:setting>
+        </con:settings>
+        <con:threadCount>5</con:threadCount>
+        <con:startDelay>0</con:startDelay>
+        <con:sampleInterval>250</con:sampleInterval>
+        <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
+        <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
+        <con:historyLimit>-1</con:historyLimit>
+        <con:testLimit>60</con:testLimit>
+        <con:limitType>TIME</con:limitType>
+        <con:loadStrategy>
+          <con:type>Simple</con:type>
+        </con:loadStrategy>
+        <con:assertion type="Step Status" name="Step Status"/>
+        <con:maxAssertionErrors>100</con:maxAssertionErrors>
+        <con:cancelExcessiveThreads>true</con:cancelExcessiveThreads>
+        <con:strategyInterval>500</con:strategyInterval>
+      </con:loadTest>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="ed146aec-43f1-4530-8db3-e670edacd028" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customer_findbyId TestCase" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [Customer_findbyId] located at [/find/customer/1000007967]
+      </con:description>
+      <con:settings/>
+      
+      <con:loadTest id="aa68dd59-fa48-4446-8f01-092ea8737999" name="LoadTest 1">
+        <con:settings>
+          <con:setting id="HttpSettings@close-connections">false</con:setting>
+        </con:settings>
+        <con:threadCount>5</con:threadCount>
+        <con:startDelay>0</con:startDelay>
+        <con:sampleInterval>250</con:sampleInterval>
+        <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
+        <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
+        <con:historyLimit>-1</con:historyLimit>
+        <con:testLimit>60</con:testLimit>
+        <con:limitType>TIME</con:limitType>
+        <con:loadStrategy>
+          <con:type>Simple</con:type>
+        </con:loadStrategy>
+        <con:assertion type="Step Status" name="Step Status"/>
+        <con:maxAssertionErrors>100</con:maxAssertionErrors>
+        <con:cancelExcessiveThreads>true</con:cancelExcessiveThreads>
+        <con:strategyInterval>500</con:strategyInterval>
+      </con:loadTest>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:testSuite id="814c9f8f-ea71-4c1a-9ef5-5df9f82b9e0e" name="TestSuite - pbuf">
+    <con:description>TestSuite generated for REST Service [http://localhost:8080/pbuf]</con:description>
+    <con:settings/>
+    <con:runType>SEQUENTIAL</con:runType>
+    <con:testCase id="43c6eeaa-71c8-4610-89c4-68a0908aca0b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customers TestCase" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [Customers] located at [/pbuf/find/customers]
+      </con:description>
+      <con:settings/>
+      <con:loadTest id="746dab9e-32ac-46c3-a3f3-bcbaeb57f3a4" name="LoadTest 1">
+        <con:settings>
+          <con:setting id="HttpSettings@close-connections">false</con:setting>
+        </con:settings>
+        <con:threadCount>5</con:threadCount>
+        <con:startDelay>0</con:startDelay>
+        <con:sampleInterval>250</con:sampleInterval>
+        <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
+        <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
+        <con:historyLimit>-1</con:historyLimit>
+        <con:testLimit>60</con:testLimit>
+        <con:limitType>TIME</con:limitType>
+        <con:loadStrategy>
+          <con:type>Simple</con:type>
+        </con:loadStrategy>
+        <con:assertion type="Step Status" name="Step Status"/>
+        <con:maxAssertionErrors>100</con:maxAssertionErrors>
+        <con:cancelExcessiveThreads>true</con:cancelExcessiveThreads>
+        <con:strategyInterval>500</con:strategyInterval>
+      </con:loadTest>
+      <con:properties/>
+    </con:testCase>
+    <con:testCase id="bdd1d30e-063e-4064-b7d5-789e18a7c069" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customer_findById TestCase" searchProperties="true">
+      <con:description>TestCase generated for REST Resource [Customer_findById] located at
+        [/pbuf/find/customer/1000007967]
+      </con:description>
+      <con:settings/>
+      <con:loadTest id="5ecc5620-8ddc-4598-9210-e5aee9241ca1" name="LoadTest 1">
+        <con:settings>
+          <con:setting id="HttpSettings@close-connections">false</con:setting>
+        </con:settings>
+        <con:threadCount>5</con:threadCount>
+        <con:startDelay>0</con:startDelay>
+        <con:sampleInterval>250</con:sampleInterval>
+        <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
+        <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
+        <con:historyLimit>-1</con:historyLimit>
+        <con:testLimit>60</con:testLimit>
+        <con:limitType>TIME</con:limitType>
+        <con:loadStrategy>
+          <con:type>Simple</con:type>
+        </con:loadStrategy>
+        <con:assertion type="Step Status" name="Step Status"/>
+        <con:maxAssertionErrors>100</con:maxAssertionErrors>
+        <con:cancelExcessiveThreads>true</con:cancelExcessiveThreads>
+        <con:strategyInterval>500</con:strategyInterval>
+      </con:loadTest>
+      <con:properties/>
+    </con:testCase>
+    <con:properties/>
+  </con:testSuite>
+  <con:properties/>
+  <con:wssContainer/>
+  <con:oAuth2ProfileContainer/>
+  <con:oAuth1ProfileContainer/>
+  <con:sensitiveInformation/>
+</con:soapui-project>

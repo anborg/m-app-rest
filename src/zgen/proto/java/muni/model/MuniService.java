@@ -3,6 +3,11 @@
 
 package muni.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import util.proto.serde.DeserializeSearchRequest;
+import util.proto.serde.SerializerGeneric;
+
 public final class MuniService {
   private MuniService() {}
   public static void registerAllExtensions(
@@ -32,6 +37,21 @@ public final class MuniService {
      * <code>.muni.model.Person person = 1;</code>
      */
     muni.model.Model.PersonOrBuilder getPersonOrBuilder();
+
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return Whether the createMask field is set.
+     */
+    boolean hasCreateMask();
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return The createMask.
+     */
+    com.google.protobuf.FieldMask getCreateMask();
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     */
+    com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder();
   }
   /**
    * <pre>
@@ -40,6 +60,7 @@ public final class MuniService {
    *
    * Protobuf type {@code muni.model.SearchPersonReq}
    */
+  @JsonDeserialize(using = DeserializeSearchRequest.class)
   public static final class SearchPersonReq extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:muni.model.SearchPersonReq)
@@ -91,6 +112,19 @@ public final class MuniService {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(person_);
                 person_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.google.protobuf.FieldMask.Builder subBuilder = null;
+              if (createMask_ != null) {
+                subBuilder = createMask_.toBuilder();
+              }
+              createMask_ = input.readMessage(com.google.protobuf.FieldMask.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(createMask_);
+                createMask_ = subBuilder.buildPartial();
               }
 
               break;
@@ -153,6 +187,32 @@ public final class MuniService {
       return getPerson();
     }
 
+    public static final int CREATE_MASK_FIELD_NUMBER = 2;
+    private com.google.protobuf.FieldMask createMask_;
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return Whether the createMask field is set.
+     */
+    @java.lang.Override
+    public boolean hasCreateMask() {
+      return createMask_ != null;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return The createMask.
+     */
+    @java.lang.Override
+    public com.google.protobuf.FieldMask getCreateMask() {
+      return createMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder() {
+      return getCreateMask();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -170,6 +230,9 @@ public final class MuniService {
       if (person_ != null) {
         output.writeMessage(1, getPerson());
       }
+      if (createMask_ != null) {
+        output.writeMessage(2, getCreateMask());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -182,6 +245,10 @@ public final class MuniService {
       if (person_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getPerson());
+      }
+      if (createMask_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getCreateMask());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -203,6 +270,11 @@ public final class MuniService {
         if (!getPerson()
             .equals(other.getPerson())) return false;
       }
+      if (hasCreateMask() != other.hasCreateMask()) return false;
+      if (hasCreateMask()) {
+        if (!getCreateMask()
+            .equals(other.getCreateMask())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -217,6 +289,10 @@ public final class MuniService {
       if (hasPerson()) {
         hash = (37 * hash) + PERSON_FIELD_NUMBER;
         hash = (53 * hash) + getPerson().hashCode();
+      }
+      if (hasCreateMask()) {
+        hash = (37 * hash) + CREATE_MASK_FIELD_NUMBER;
+        hash = (53 * hash) + getCreateMask().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -361,6 +437,12 @@ public final class MuniService {
           person_ = null;
           personBuilder_ = null;
         }
+        if (createMaskBuilder_ == null) {
+          createMask_ = null;
+        } else {
+          createMask_ = null;
+          createMaskBuilder_ = null;
+        }
         return this;
       }
 
@@ -391,6 +473,11 @@ public final class MuniService {
           result.person_ = person_;
         } else {
           result.person_ = personBuilder_.build();
+        }
+        if (createMaskBuilder_ == null) {
+          result.createMask_ = createMask_;
+        } else {
+          result.createMask_ = createMaskBuilder_.build();
         }
         onBuilt();
         return result;
@@ -442,6 +529,9 @@ public final class MuniService {
         if (other == muni.model.MuniService.SearchPersonReq.getDefaultInstance()) return this;
         if (other.hasPerson()) {
           mergePerson(other.getPerson());
+        }
+        if (other.hasCreateMask()) {
+          mergeCreateMask(other.getCreateMask());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -590,6 +680,125 @@ public final class MuniService {
         }
         return personBuilder_;
       }
+
+      private com.google.protobuf.FieldMask createMask_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> createMaskBuilder_;
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       * @return Whether the createMask field is set.
+       */
+      public boolean hasCreateMask() {
+        return createMaskBuilder_ != null || createMask_ != null;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       * @return The createMask.
+       */
+      public com.google.protobuf.FieldMask getCreateMask() {
+        if (createMaskBuilder_ == null) {
+          return createMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+        } else {
+          return createMaskBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder setCreateMask(com.google.protobuf.FieldMask value) {
+        if (createMaskBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          createMask_ = value;
+          onChanged();
+        } else {
+          createMaskBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder setCreateMask(
+          com.google.protobuf.FieldMask.Builder builderForValue) {
+        if (createMaskBuilder_ == null) {
+          createMask_ = builderForValue.build();
+          onChanged();
+        } else {
+          createMaskBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder mergeCreateMask(com.google.protobuf.FieldMask value) {
+        if (createMaskBuilder_ == null) {
+          if (createMask_ != null) {
+            createMask_ =
+              com.google.protobuf.FieldMask.newBuilder(createMask_).mergeFrom(value).buildPartial();
+          } else {
+            createMask_ = value;
+          }
+          onChanged();
+        } else {
+          createMaskBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder clearCreateMask() {
+        if (createMaskBuilder_ == null) {
+          createMask_ = null;
+          onChanged();
+        } else {
+          createMask_ = null;
+          createMaskBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public com.google.protobuf.FieldMask.Builder getCreateMaskBuilder() {
+        
+        onChanged();
+        return getCreateMaskFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder() {
+        if (createMaskBuilder_ != null) {
+          return createMaskBuilder_.getMessageOrBuilder();
+        } else {
+          return createMask_ == null ?
+              com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> 
+          getCreateMaskFieldBuilder() {
+        if (createMaskBuilder_ == null) {
+          createMaskBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder>(
+                  getCreateMask(),
+                  getParentForChildren(),
+                  isClean());
+          createMask_ = null;
+        }
+        return createMaskBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -674,6 +883,7 @@ public final class MuniService {
   /**
    * Protobuf type {@code muni.model.SearchPersonRes}
    */
+  @JsonSerialize(using = SerializerGeneric.class)
   public static final class SearchPersonRes extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:muni.model.SearchPersonRes)
@@ -1454,10 +1664,26 @@ public final class MuniService {
      * <code>.muni.model.Person person = 1;</code>
      */
     muni.model.Model.PersonOrBuilder getPersonOrBuilder();
+
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return Whether the createMask field is set.
+     */
+    boolean hasCreateMask();
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return The createMask.
+     */
+    com.google.protobuf.FieldMask getCreateMask();
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     */
+    com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder();
   }
   /**
    * Protobuf type {@code muni.model.CreatePersonReq}
    */
+  @JsonDeserialize(using = DeserializeSearchRequest.class)
   public static final class CreatePersonReq extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:muni.model.CreatePersonReq)
@@ -1509,6 +1735,19 @@ public final class MuniService {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(person_);
                 person_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              com.google.protobuf.FieldMask.Builder subBuilder = null;
+              if (createMask_ != null) {
+                subBuilder = createMask_.toBuilder();
+              }
+              createMask_ = input.readMessage(com.google.protobuf.FieldMask.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(createMask_);
+                createMask_ = subBuilder.buildPartial();
               }
 
               break;
@@ -1571,6 +1810,32 @@ public final class MuniService {
       return getPerson();
     }
 
+    public static final int CREATE_MASK_FIELD_NUMBER = 2;
+    private com.google.protobuf.FieldMask createMask_;
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return Whether the createMask field is set.
+     */
+    @java.lang.Override
+    public boolean hasCreateMask() {
+      return createMask_ != null;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     * @return The createMask.
+     */
+    @java.lang.Override
+    public com.google.protobuf.FieldMask getCreateMask() {
+      return createMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+    }
+    /**
+     * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder() {
+      return getCreateMask();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1588,6 +1853,9 @@ public final class MuniService {
       if (person_ != null) {
         output.writeMessage(1, getPerson());
       }
+      if (createMask_ != null) {
+        output.writeMessage(2, getCreateMask());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1600,6 +1868,10 @@ public final class MuniService {
       if (person_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getPerson());
+      }
+      if (createMask_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getCreateMask());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1621,6 +1893,11 @@ public final class MuniService {
         if (!getPerson()
             .equals(other.getPerson())) return false;
       }
+      if (hasCreateMask() != other.hasCreateMask()) return false;
+      if (hasCreateMask()) {
+        if (!getCreateMask()
+            .equals(other.getCreateMask())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1635,6 +1912,10 @@ public final class MuniService {
       if (hasPerson()) {
         hash = (37 * hash) + PERSON_FIELD_NUMBER;
         hash = (53 * hash) + getPerson().hashCode();
+      }
+      if (hasCreateMask()) {
+        hash = (37 * hash) + CREATE_MASK_FIELD_NUMBER;
+        hash = (53 * hash) + getCreateMask().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -1775,6 +2056,12 @@ public final class MuniService {
           person_ = null;
           personBuilder_ = null;
         }
+        if (createMaskBuilder_ == null) {
+          createMask_ = null;
+        } else {
+          createMask_ = null;
+          createMaskBuilder_ = null;
+        }
         return this;
       }
 
@@ -1805,6 +2092,11 @@ public final class MuniService {
           result.person_ = person_;
         } else {
           result.person_ = personBuilder_.build();
+        }
+        if (createMaskBuilder_ == null) {
+          result.createMask_ = createMask_;
+        } else {
+          result.createMask_ = createMaskBuilder_.build();
         }
         onBuilt();
         return result;
@@ -1856,6 +2148,9 @@ public final class MuniService {
         if (other == muni.model.MuniService.CreatePersonReq.getDefaultInstance()) return this;
         if (other.hasPerson()) {
           mergePerson(other.getPerson());
+        }
+        if (other.hasCreateMask()) {
+          mergeCreateMask(other.getCreateMask());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2004,6 +2299,125 @@ public final class MuniService {
         }
         return personBuilder_;
       }
+
+      private com.google.protobuf.FieldMask createMask_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> createMaskBuilder_;
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       * @return Whether the createMask field is set.
+       */
+      public boolean hasCreateMask() {
+        return createMaskBuilder_ != null || createMask_ != null;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       * @return The createMask.
+       */
+      public com.google.protobuf.FieldMask getCreateMask() {
+        if (createMaskBuilder_ == null) {
+          return createMask_ == null ? com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+        } else {
+          return createMaskBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder setCreateMask(com.google.protobuf.FieldMask value) {
+        if (createMaskBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          createMask_ = value;
+          onChanged();
+        } else {
+          createMaskBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder setCreateMask(
+          com.google.protobuf.FieldMask.Builder builderForValue) {
+        if (createMaskBuilder_ == null) {
+          createMask_ = builderForValue.build();
+          onChanged();
+        } else {
+          createMaskBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder mergeCreateMask(com.google.protobuf.FieldMask value) {
+        if (createMaskBuilder_ == null) {
+          if (createMask_ != null) {
+            createMask_ =
+              com.google.protobuf.FieldMask.newBuilder(createMask_).mergeFrom(value).buildPartial();
+          } else {
+            createMask_ = value;
+          }
+          onChanged();
+        } else {
+          createMaskBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public Builder clearCreateMask() {
+        if (createMaskBuilder_ == null) {
+          createMask_ = null;
+          onChanged();
+        } else {
+          createMask_ = null;
+          createMaskBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public com.google.protobuf.FieldMask.Builder getCreateMaskBuilder() {
+        
+        onChanged();
+        return getCreateMaskFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      public com.google.protobuf.FieldMaskOrBuilder getCreateMaskOrBuilder() {
+        if (createMaskBuilder_ != null) {
+          return createMaskBuilder_.getMessageOrBuilder();
+        } else {
+          return createMask_ == null ?
+              com.google.protobuf.FieldMask.getDefaultInstance() : createMask_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.FieldMask create_mask = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder> 
+          getCreateMaskFieldBuilder() {
+        if (createMaskBuilder_ == null) {
+          createMaskBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.FieldMask, com.google.protobuf.FieldMask.Builder, com.google.protobuf.FieldMaskOrBuilder>(
+                  getCreateMask(),
+                  getParentForChildren(),
+                  isClean());
+          createMask_ = null;
+        }
+        return createMaskBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -2083,27 +2497,33 @@ public final class MuniService {
     java.lang.String[] descriptorData = {
       "\n\022muni-service.proto\022\nmuni.model\032\034google" +
       "/api/annotations.proto\032\033google/protobuf/" +
-      "empty.proto\032\020muni-model.proto\"5\n\017SearchP" +
-      "ersonReq\022\"\n\006person\030\001 \001(\0132\022.muni.model.Pe" +
-      "rson\"6\n\017SearchPersonRes\022#\n\007persons\030\001 \003(\013" +
-      "2\022.muni.model.Person\"5\n\017CreatePersonReq\022" +
-      "\"\n\006person\030\001 \001(\0132\022.muni.model.Person2t\n\rP" +
-      "ersonService\022c\n\006create\022\033.muni.model.Crea" +
-      "tePersonReq\032\022.muni.model.Person\"(\202\323\344\223\002\"\"" +
-      "\030/mkapp/v1/persons/create:\006person2\211\002\n\rSe" +
-      "archService\022H\n\npersonById\022\033.muni.model.S" +
-      "earchPersonReq\032\033.muni.model.SearchPerson" +
-      "Res\"\000\022L\n\016personsSimilar\022\033.muni.model.Sea" +
+      "empty.proto\032 google/protobuf/field_mask." +
+      "proto\032\020muni-model.proto\"f\n\017SearchPersonR" +
+      "eq\022\"\n\006person\030\001 \001(\0132\022.muni.model.Person\022/" +
+      "\n\013create_mask\030\002 \001(\0132\032.google.protobuf.Fi" +
+      "eldMask\"6\n\017SearchPersonRes\022#\n\007persons\030\001 " +
+      "\003(\0132\022.muni.model.Person\"f\n\017CreatePersonR" +
+      "eq\022\"\n\006person\030\001 \001(\0132\022.muni.model.Person\022/" +
+      "\n\013create_mask\030\002 \001(\0132\032.google.protobuf.Fi" +
+      "eldMask2o\n\rPersonService\022^\n\006create\022\033.mun" +
+      "i.model.CreatePersonReq\032\022.muni.model.Per" +
+      "son\"#\202\323\344\223\002\035\"\030/mkapp/v1/persons/create:\001*" +
+      "2\323\002\n\rSearchService\022i\n\npersonById\022\033.muni." +
+      "model.SearchPersonReq\032\033.muni.model.Searc" +
+      "hPersonRes\"!\202\323\344\223\002\033\"\026/mkapp/v1/persons/by" +
+      "Id:\001*\022u\n\016personsSimilar\022\033.muni.model.Sea" +
       "rchPersonReq\032\033.muni.model.SearchPersonRe" +
-      "s\"\000\022`\n\npersonsAll\022\026.google.protobuf.Empt" +
-      "y\032\033.muni.model.SearchPersonRes\"\035\202\323\344\223\002\027\022\025" +
-      "/mkapp/v1/persons/allB\005P\000\210\001\000b\006proto3"
+      "s\")\202\323\344\223\002#\"\031/mkapp/v1/persons/similar:\006pe" +
+      "rson\022`\n\npersonsAll\022\026.google.protobuf.Emp" +
+      "ty\032\033.muni.model.SearchPersonRes\"\035\202\323\344\223\002\027\022" +
+      "\025/mkapp/v1/persons/allB\005P\000\210\001\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.api.AnnotationsProto.getDescriptor(),
           com.google.protobuf.EmptyProto.getDescriptor(),
+          com.google.protobuf.FieldMaskProto.getDescriptor(),
           muni.model.Model.getDescriptor(),
         });
     internal_static_muni_model_SearchPersonReq_descriptor =
@@ -2111,7 +2531,7 @@ public final class MuniService {
     internal_static_muni_model_SearchPersonReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_muni_model_SearchPersonReq_descriptor,
-        new java.lang.String[] { "Person", });
+        new java.lang.String[] { "Person", "CreateMask", });
     internal_static_muni_model_SearchPersonRes_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_muni_model_SearchPersonRes_fieldAccessorTable = new
@@ -2123,7 +2543,7 @@ public final class MuniService {
     internal_static_muni_model_CreatePersonReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_muni_model_CreatePersonReq_descriptor,
-        new java.lang.String[] { "Person", });
+        new java.lang.String[] { "Person", "CreateMask", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(com.google.api.AnnotationsProto.http);
@@ -2131,6 +2551,7 @@ public final class MuniService {
         .internalUpdateFileDescriptor(descriptor, registry);
     com.google.api.AnnotationsProto.getDescriptor();
     com.google.protobuf.EmptyProto.getDescriptor();
+    com.google.protobuf.FieldMaskProto.getDescriptor();
     muni.model.Model.getDescriptor();
   }
 

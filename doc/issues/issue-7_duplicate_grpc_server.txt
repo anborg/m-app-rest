@@ -1,0 +1,28 @@
+__  ____  __  _____   ___  __ ____  ______
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+2020-10-07 00:59:55,043 INFO  [io.qua.grp.run.GrpcServerRecorder] (Quarkus Main Thread) Registering gRPC reflection service
+2020-10-07 00:59:55,111 ERROR [io.qua.application] (Quarkus Main Thread) Failed to start application (with profile dev): java.lang.IllegalStateException: Duplicated gRPC service: muni.model.SearchSe
+rvice
+        at io.quarkus.grpc.runtime.reflection.GrpcServerIndex.<init>(GrpcServerIndex.java:49)
+        at io.quarkus.grpc.runtime.reflection.ReflectionService.<init>(ReflectionService.java:32)
+        at io.quarkus.grpc.runtime.GrpcServerRecorder.buildServer(GrpcServerRecorder.java:279)
+        at io.quarkus.grpc.runtime.GrpcServerRecorder.devModeStart(GrpcServerRecorder.java:141)
+        at io.quarkus.grpc.runtime.GrpcServerRecorder.initializeGrpcServer(GrpcServerRecorder.java:80)
+        at io.quarkus.deployment.steps.GrpcServerProcessor$build215158828.deploy_0(GrpcServerProcessor$build215158828.zig:94)
+        at io.quarkus.deployment.steps.GrpcServerProcessor$build215158828.deploy(GrpcServerProcessor$build215158828.zig:40)
+        at io.quarkus.runner.ApplicationImpl.doStart(ApplicationImpl.zig:587)
+        at io.quarkus.runtime.Application.start(Application.java:90)
+        at io.quarkus.runtime.ApplicationLifecycleManager.run(ApplicationLifecycleManager.java:91)
+        at io.quarkus.runtime.Quarkus.run(Quarkus.java:61)
+        at io.quarkus.runtime.Quarkus.run(Quarkus.java:38)
+        at io.quarkus.runtime.Quarkus.run(Quarkus.java:106)
+        at io.quarkus.runner.GeneratedMain.main(GeneratedMain.zig:29)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+        at io.quarkus.runner.bootstrap.StartupActionImpl$3.run(StartupActionImpl.java:134)
+        at java.base/java.lang.Thread.run(Thread.java:834)
+

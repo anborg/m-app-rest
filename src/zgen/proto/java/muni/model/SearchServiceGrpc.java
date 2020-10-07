@@ -172,7 +172,7 @@ public final class SearchServiceGrpc {
      * <pre>
      * Returns a specific Person
      * Client example - returns person id=1:
-     *   curl http://localhost:8080/mkapp/v1/person/1
+     *   curl http://localhost:8080//mkapp/v1/persons/byId
      * </pre>
      */
     public void personById(muni.model.MuniService.SearchPersonReq request,
@@ -181,12 +181,6 @@ public final class SearchServiceGrpc {
     }
 
     /**
-     * <pre>
-     *     option (google.api.http) = {
-     *       post: "/mkapp/v1/persons/similar"
-     *       body: "person"
-     *     };
-     * </pre>
      */
     public void personsSimilar(muni.model.MuniService.SearchPersonReq request,
         io.grpc.stub.StreamObserver<muni.model.MuniService.SearchPersonRes> responseObserver) {
@@ -248,7 +242,7 @@ public final class SearchServiceGrpc {
      * <pre>
      * Returns a specific Person
      * Client example - returns person id=1:
-     *   curl http://localhost:8080/mkapp/v1/person/1
+     *   curl http://localhost:8080//mkapp/v1/persons/byId
      * </pre>
      */
     public void personById(muni.model.MuniService.SearchPersonReq request,
@@ -258,12 +252,6 @@ public final class SearchServiceGrpc {
     }
 
     /**
-     * <pre>
-     *     option (google.api.http) = {
-     *       post: "/mkapp/v1/persons/similar"
-     *       body: "person"
-     *     };
-     * </pre>
      */
     public void personsSimilar(muni.model.MuniService.SearchPersonReq request,
         io.grpc.stub.StreamObserver<muni.model.MuniService.SearchPersonRes> responseObserver) {
@@ -301,7 +289,7 @@ public final class SearchServiceGrpc {
      * <pre>
      * Returns a specific Person
      * Client example - returns person id=1:
-     *   curl http://localhost:8080/mkapp/v1/person/1
+     *   curl http://localhost:8080//mkapp/v1/persons/byId
      * </pre>
      */
     public muni.model.MuniService.SearchPersonRes personById(muni.model.MuniService.SearchPersonReq request) {
@@ -310,12 +298,6 @@ public final class SearchServiceGrpc {
     }
 
     /**
-     * <pre>
-     *     option (google.api.http) = {
-     *       post: "/mkapp/v1/persons/similar"
-     *       body: "person"
-     *     };
-     * </pre>
      */
     public muni.model.MuniService.SearchPersonRes personsSimilar(muni.model.MuniService.SearchPersonReq request) {
       return blockingUnaryCall(
@@ -351,7 +333,7 @@ public final class SearchServiceGrpc {
      * <pre>
      * Returns a specific Person
      * Client example - returns person id=1:
-     *   curl http://localhost:8080/mkapp/v1/person/1
+     *   curl http://localhost:8080//mkapp/v1/persons/byId
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<muni.model.MuniService.SearchPersonRes> personById(
@@ -361,12 +343,6 @@ public final class SearchServiceGrpc {
     }
 
     /**
-     * <pre>
-     *     option (google.api.http) = {
-     *       post: "/mkapp/v1/persons/similar"
-     *       body: "person"
-     *     };
-     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<muni.model.MuniService.SearchPersonRes> personsSimilar(
         muni.model.MuniService.SearchPersonReq request) {
