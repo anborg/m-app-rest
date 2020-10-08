@@ -11,7 +11,7 @@ import muni.util.ProtoUtil;
 
 import java.io.IOException;
 
-public  class SerializerGeneric extends JsonSerializer<Message> {
+public  class SerGeneric extends JsonSerializer<Message> {
     @Override
     public void serialize(Message message, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         System.out.println("In Serialize = " + message);
@@ -24,9 +24,6 @@ public  class SerializerGeneric extends JsonSerializer<Message> {
     }
   }
 
-  /*
-  InvalidDefinitionException: Direct self-reference leading to cycle (through reference chain: muni.model.MuniService$SearchPersonRes["unknownFields"]->com.google.protobuf.UnknownFieldSet
- */
 
   /*
   Hack.

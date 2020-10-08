@@ -8,6 +8,7 @@ import muni.model.MuniService;
 import muni.model.PersonServiceGrpc;
 
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton

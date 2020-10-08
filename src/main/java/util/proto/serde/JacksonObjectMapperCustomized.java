@@ -1,11 +1,19 @@
 package util.proto.serde;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.protobuf.UnknownFieldSet;
 import io.quarkus.jackson.ObjectMapperCustomizer;
+import muni.model.Model;
+import muni.model.MuniService;
+import muni.util.ProtoUtil;
+
 import javax.inject.Singleton;
+import java.io.IOException;
 
 @Singleton
 public class JacksonObjectMapperCustomized implements ObjectMapperCustomizer {
@@ -16,13 +24,64 @@ public class JacksonObjectMapperCustomized implements ObjectMapperCustomizer {
         //mapper.configure(SerializationFeature.FAIL_ON_SELF_REFERENCES, false);
 //        mapper.registerModule(new DeserializeSearchRequest());
         mapper.addMixIn(UnknownFieldSet.class, UnknownFieldSetIgnoreMixIn.class);
+
+
+        mapper.registerModule(deserializerModule());
+
     }
-    @JsonIgnoreType
-    private abstract class UnknownFieldSetIgnoreMixIn {
+
+    private SimpleModule deserializerModule(){
+        SimpleModule module = new SimpleModule();
+        //input param
+        module.addDeserializer(MuniService.SearchPersonReq.class, new DesSearchPersonReq());
+        module.addDeserializer(MuniService.CreatePersonReq.class, new DesCreatePersonReq());
+        //return param
+        module.addSerializer(Model.Person.class, new SerGeneric());
+        module.addSerializer(MuniService.SearchPersonRes.class, new SerGeneric());
+        return module;
+    }
+
+
+
+
+}
+
+
+
+@JsonIgnoreType
+abstract class UnknownFieldSetIgnoreMixIn {
          /*
           InvalidDefinitionException: Direct self-reference leading to cycle (through reference chain:
           muni.model.MuniService$SearchPersonRes["unknownFields"]->com.google.protobuf.UnknownFieldSet
          */
+}
+
+//------------ Deser input parameters - from wire
+
+
+class DesSearchPersonReq extends JsonDeserializer<MuniService.SearchPersonReq> {
+    @Override
+    public MuniService.SearchPersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        String strObj = jsonParser.readValueAsTree().toString();
+        MuniService.SearchPersonReq req = ProtoUtil.toProto(strObj, MuniService.SearchPersonReq.getDefaultInstance());
+        return req;
+    }
+}
+class DesCreatePersonReq extends JsonDeserializer<MuniService.CreatePersonReq> {
+    @Override
+    public MuniService.CreatePersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        String strObj = jsonParser.readValueAsTree().toString();
+        MuniService.CreatePersonReq req = ProtoUtil.toProto(strObj, MuniService.CreatePersonReq.getDefaultInstance());
+        return req;
     }
 }
 
+//------------ Ser OUT paramters to wire - just use Generic
+
+// and NullSerializer can be something as simple as:
+class NullSerializer extends JsonSerializer<Object>{
+    public void serialize(Object value, JsonGenerator jgen,SerializerProvider provider)throws IOException{
+        // any JSON value you want...
+        jgen.writeString("");
+    }
+}

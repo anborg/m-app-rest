@@ -9,6 +9,7 @@ import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.SearchServiceGrpc;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Objects;
 

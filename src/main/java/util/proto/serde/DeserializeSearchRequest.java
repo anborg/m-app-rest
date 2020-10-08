@@ -9,7 +9,7 @@ import muni.util.ProtoUtil;
 
 import javax.inject.Singleton;
 import java.io.IOException;
-@Singleton
+//@Singleton
 public class DeserializeSearchRequest extends JsonDeserializer<MuniService.SearchPersonReq> {
     @Override
     public MuniService.SearchPersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {

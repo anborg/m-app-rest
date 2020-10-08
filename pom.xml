@@ -6,6 +6,7 @@
   <artifactId>app-rest</artifactId>
   <version>1.0.0</version>
   <properties>
+    <muni-model.version>1.0-SNAPSHOT</muni-model.version>
     <compiler-plugin.version>3.8.0</compiler-plugin.version>
     <grpc.version>1.29.0</grpc.version>
     <java.version>11</java.version>
@@ -35,6 +36,13 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+
+    <dependency>
+      <groupId>muni</groupId>
+      <artifactId>muni-api-protogen</artifactId>
+      <version>${muni-model.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
@@ -88,12 +96,13 @@
   </dependencies>
   <build>
     <extensions>
-      <extension>
-        <groupId>kr.motd.maven</groupId>
-        <artifactId>os-maven-plugin</artifactId>
-        <version>${os-maven-plugin.version}</version>
-      </extension>
+<!--      <extension>-->
+<!--        <groupId>kr.motd.maven</groupId>-->
+<!--        <artifactId>os-maven-plugin</artifactId>-->
+<!--        <version>${os-maven-plugin.version}</version>-->
+<!--      </extension>-->
     </extensions>
+
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -109,7 +118,7 @@
             <configuration>
               <sources>
                 <source>${basedir}/src/main/java</source>
-                <source>${basedir}/src/zgen/proto/java</source>
+<!--                <source>${basedir}/src/zgen/proto/java</source>-->
               </sources>
             </configuration>
           </execution>
@@ -119,8 +128,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${compiler-plugin.version}</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
       </plugin>
       <plugin>
