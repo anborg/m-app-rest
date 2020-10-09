@@ -1,6 +1,6 @@
 package muni.util;
 
-import app.api.ApiException;
+import app.api.AppException;
 import com.google.protobuf.Message;
 import com.google.protobuf.MessageOrBuilder;
 import com.google.protobuf.util.JsonFormat;
@@ -11,7 +11,7 @@ public class ProtoUtil {
         try{
             return JsonFormat.printer().print(obj);
         }catch(Exception e){
-            throw new ApiException("Error converting Proto to json", e);
+            throw new AppException("Error converting Proto to json", e);
         }
     }
     public static <T extends MessageOrBuilder> T toProto(String protoJsonStr, T message){
@@ -21,7 +21,7 @@ public class ProtoUtil {
             T out = (T) builder.build();
             return out;
         }catch(Exception e){
-            throw new ApiException("Error converting Proto to json", e);
+            throw new AppException("Error converting Proto to json", e);
         }
     }
 }

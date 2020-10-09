@@ -33,11 +33,11 @@ public class JacksonObjectMapperCustomized implements ObjectMapperCustomizer {
     private SimpleModule deserializerModule(){
         SimpleModule module = new SimpleModule();
         //input param
-        module.addDeserializer(MuniService.SearchPersonReq.class, new DesSearchPersonReq());
+        module.addDeserializer(MuniService.SearchReqPerson.class, new DesSearchPersonReq());
         module.addDeserializer(MuniService.CreatePersonReq.class, new DesCreatePersonReq());
         //return param
         module.addSerializer(Model.Person.class, new SerGeneric());
-        module.addSerializer(MuniService.SearchPersonRes.class, new SerGeneric());
+        module.addSerializer(MuniService.SearchRes.class, new SerGeneric()); // ONE entry for all search REsponse.
         return module;
     }
 
@@ -59,11 +59,11 @@ abstract class UnknownFieldSetIgnoreMixIn {
 //------------ Deser input parameters - from wire
 
 
-class DesSearchPersonReq extends JsonDeserializer<MuniService.SearchPersonReq> {
+class DesSearchPersonReq extends JsonDeserializer<MuniService.SearchReqPerson> {
     @Override
-    public MuniService.SearchPersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public MuniService.SearchReqPerson deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String strObj = jsonParser.readValueAsTree().toString();
-        MuniService.SearchPersonReq req = ProtoUtil.toProto(strObj, MuniService.SearchPersonReq.getDefaultInstance());
+        MuniService.SearchReqPerson req = ProtoUtil.toProto(strObj, MuniService.SearchReqPerson.getDefaultInstance());
         return req;
     }
 }
