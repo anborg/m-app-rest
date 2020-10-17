@@ -6,14 +6,15 @@
   <groupId>mkm</groupId>
   <artifactId>app-rest</artifactId>
   <version>1.0.0</version>
-  <parent>
-    <groupId>mkm</groupId>
-    <artifactId>mkm-app-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
+  <!--  <parent>-->
+  <!--    <groupId>mkm</groupId>-->
+  <!--    <artifactId>mkm-app-parent</artifactId>-->
+  <!--    <version>1.0-SNAPSHOT</version>-->
+  <!--  </parent>-->
 
   <properties>
     <muni-model.version>1.0-SNAPSHOT</muni-model.version>
+    <integ.version>1.0-SNAPSHOT</integ.version>
     <amanda.version>1.0-SNAPSHOT</amanda.version>
     <hansen.version>1.0-SNAPSHOT</hansen.version>
 
@@ -47,11 +48,25 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!--
+    ANTLR Tool version 4.7.2 used for code generation does not match the current runtime version 4.8
+    "org.antlr:antlr4-runtime:4.7.2" -->
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr4-runtime</artifactId>
+      <version>4.7.2</version>
+      <scope>runtime</scope>
+    </dependency>
 
     <dependency>
       <groupId>muni</groupId>
       <artifactId>muni-api-protogen</artifactId>
       <version>${muni-model.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>m</groupId>
+      <artifactId>lib-integ</artifactId>
+      <version>${integ.version}</version>
     </dependency>
     <dependency>
       <groupId>mkm</groupId>

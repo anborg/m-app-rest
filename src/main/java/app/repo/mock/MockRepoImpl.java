@@ -22,13 +22,14 @@ public class MockRepoImpl implements PersonRepo {
 
 
     @Override
-    public Model.Person get(String id){
+    public Optional<Model.Person> get(String id) {
         final Model.Person out = map.get(id);
-        System.out.println( "Mock: person=" +id +" , obj= "+ out);
-        return out;
+        //System.out.println( "Mock: person=" +id +" , obj= "+ out);
+        return Optional.of(out);
     }
+
     @Override
-    public Collection<Model.Person> byAddress(Model.PostalAddress address){
+    public Collection<Model.Person> byAddress(Model.PostalAddress address) {
         //
         return map.values();
     }
@@ -42,7 +43,8 @@ public class MockRepoImpl implements PersonRepo {
     public Model.Person save(Model.Person in) {
         String updateId = in.getId();
         System.out.println("updateId = " + updateId);
-        Model.Person pExisting = get(updateId);
+        Optional<Model.Person> pExistingOpt = get(updateId);
+        Model.Person pExisting = pExistingOpt.get();
         Model.Person.Builder outBuild = Model.Person.newBuilder(pExisting);
         boolean hasChange = false;
         //Change only fields that are provided in POST body.

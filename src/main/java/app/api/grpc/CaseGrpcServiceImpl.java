@@ -15,8 +15,6 @@ public class CaseGrpcServiceImpl extends CaseServiceGrpc.CaseServiceImplBase {
 
     PersonRepo repo = new MockRepoImpl();
 
-
-
     @Override
     public void get(MuniService.ById req, StreamObserver<Model.Case> resObs) {
         System.out.println("case.ById " + req);

@@ -3,35 +3,35 @@ package util.proto.serde;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.google.common.base.Strings;
 import com.google.protobuf.Message;
-//import com.google.protobuf.util.JsonFormat;
-import com.google.protobuf.Parser;
-import com.google.protobuf.util.JsonFormat;
 import muni.util.ProtoUtil;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public  class SerGeneric extends JsonSerializer<Message> {
+//import com.google.protobuf.util.JsonFormat;
+
+public class SerGeneric extends JsonSerializer<Message> {
+
     @Override
     public void serialize(Message message, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        System.out.println("In Serialize = " + message);
-//        String json = "";
-//        JsonFormat.Parser p =JsonFormat.parser();
-//        p.merge(json, message.toBuilder());
-//        System.out.println("To Json String = " + json);
-////        gen.writeString(json);
-        gen.writeRawValue(JsonFormat.printer().print(message));
+        System.out.println("#### In SerGeneric: isIntialized=" + message.isInitialized() + ", isNullOrEmptyProto=" + Strings.isNullOrEmpty(message.toString()) + " " + message);
+//        gen.writeRawValue(JsonFormat.printer().print(message));
+        String jsonStr = ProtoUtil.toJson(message);
+        if (Objects.nonNull(jsonStr)) {
+            gen.writeRawValue(jsonStr);
+        }
+//        else {
+//            gen.writeRawValue("");
+//        }
     }
   }
-
-
-  /*
+/*
   Hack.
 
   Add this annotation on top of interface classes. see Readme
 
   @JsonSerialize(using = MyMessageSerializer.class)
   public  static final class Customer extends
-
-
-   */
+*/

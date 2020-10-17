@@ -1,37 +1,48 @@
 package app.api.grpc;
 
-import app.repo.PersonRepo;
-import app.repo.mock.MockRepoImpl;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.PersonServiceGrpc;
+import muni.service.SubsystemService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.Optional;
 
 @Singleton
 public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBase {
-    PersonRepo repo = new MockRepoImpl();
+    //    PersonRepo repo = new MockRepoImpl();
+    @Named("integ-service")
+    SubsystemService integSvc;
+
     @Override
     public void create(MuniService.CreatePersonReq req, StreamObserver<Model.Person> resObs) {
-//        System.out.println(req);
-        final Model.Person savedPerson = repo.save(req.getPerson());
+        System.out.println(req);
+        final Model.Person savedPerson = integSvc.person().save(req.getPerson());
         resObs.onNext(Model.Person.newBuilder(savedPerson).build());
         resObs.onCompleted();
     }
 
     @Override
     public void get(MuniService.ById req, StreamObserver<Model.Person> resObs) {
-        System.out.println("Search.personById " + req);
+        System.out.println("PersonGrpc personById " + req);
         String id = req.getId();
-        Model.Person res = repo.get(id); //TODO handle not found
-        resObs.onNext(res);
+        Optional<Model.Person> res = integSvc.person().get(id); //TODO handle not found
+        //res.ifPresent();
+        if (res.isPresent()) {
+            resObs.onNext(res.get());
+        } else {
+            resObs.onNext(null);
+        }
+        System.out.println("PersonGrpc " + res);
+
         resObs.onCompleted();
     }
 
@@ -53,14 +64,14 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     @Override
     public void getAll(Empty req, StreamObserver<MuniService.PersonList> resObs) {
         System.out.println(req);
-        resObs.onNext(MuniService.PersonList.newBuilder().addAllPersons(repo.all()).build());
+        resObs.onNext(MuniService.PersonList.newBuilder().addAllPersons(integSvc.person().recent()).build());
         resObs.onCompleted();
     }
 
     @Override
     public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
         System.out.println(req);
-        Model.Person res = repo.save(req);
+        Model.Person res = integSvc.person().save(req);
         resObs.onNext(res);//TODO handle not found
         resObs.onCompleted();
     }

@@ -63,7 +63,7 @@ class DesSearchPersonReq extends JsonDeserializer<MuniService.SearchReqPerson> {
     @Override
     public MuniService.SearchReqPerson deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String strObj = jsonParser.readValueAsTree().toString();
-        MuniService.SearchReqPerson req = ProtoUtil.toProto(strObj, MuniService.SearchReqPerson.getDefaultInstance());
+        MuniService.SearchReqPerson req = ProtoUtil.toProto(strObj, MuniService.SearchReqPerson.getDefaultInstance()).get();
         return req;
     }
 }
@@ -71,7 +71,7 @@ class DesCreatePersonReq extends JsonDeserializer<MuniService.CreatePersonReq> {
     @Override
     public MuniService.CreatePersonReq deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         String strObj = jsonParser.readValueAsTree().toString();
-        MuniService.CreatePersonReq req = ProtoUtil.toProto(strObj, MuniService.CreatePersonReq.getDefaultInstance());
+        MuniService.CreatePersonReq req = ProtoUtil.toProto(strObj, MuniService.CreatePersonReq.getDefaultInstance()).get();
         return req;
     }
 }

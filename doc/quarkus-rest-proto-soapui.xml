@@ -202,32 +202,397 @@
     "id": "79d87572-6b60-4662-99dc-dcc62328babd",
     "firstName": "Hello",
     "lastName": "Hello",
-  }
-}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="byId" path="persons/byId" id="e933d5d3-d5af-4192-9923-fa3d84a96a10"><con:settings/><con:parameters><con:parameter><con:name>person</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description xsi:nil="true"/></con:parameter></con:parameters><con:method name="Method 1" id="e2741b91-ba55-4c48-956d-abc862ee8d93" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/protobuf</con:mediaType><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/x-protobuf</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>text/plain</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="42f9e9da-a8c3-45dc-9aab-50e01ce709d0" mediaType="multipart/form-data" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  &lt;con:entry key="Accept" value="application/x-protobuf,applicaation/json"/>
-  &lt;con:entry key="Content-Type" value="text/plain"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
-  "person": {
-    "id": "1"
-  }
-}</con:request><con:originalUri>http://localhost/mkapp/v1/persons/byId</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters><entry key="person" value="{   &quot;person&quot;: {     &quot;id&quot;: &quot;1&quot;   } }" xmlns="http://eviware.com/soapui/config"/></con:parameters><con:parameterOrder><con:entry>person</con:entry></con:parameterOrder></con:request></con:method></con:resource></con:resource><con:resource name="v1" path="/mkapp/rest/v1" id="ec9545c1-972f-4976-a5fa-08dd07211061"><con:settings/><con:parameters/><con:resource name="person" path="persons" id="661d11e6-be6c-49f7-8a0a-0e7f538be193"><con:settings/><con:parameters/><con:resource name="all" path="all" id="493caa87-dd44-4b9e-b9f3-e898023690b2"><con:settings/><con:parameters/><con:method name="Method 1" id="2e5c40ca-efc9-44c2-9cb8-288a5f8ab1f4" method="GET"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>text/html; charset=utf-8</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:all="http://localhost/mkapp/rest/v1/person/all">all:Response</con:element></con:representation><con:request name="Request 1" id="3eea5054-7315-4a88-b63a-ec11de1318ae" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:originalUri>http://localhost/mkapp/rest/v1/person/all</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="similar" path="similar" id="68dbcfe3-49ab-40ec-8465-dc4ad0ecef76"><con:settings/><con:parameters/><con:method name="get-person-similar" id="7c846a16-cf52-4280-85b9-9432cc6f900b" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>415</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=UTF-8</con:mediaType><con:status>500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json; charset=utf-8</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sim="http://localhost/mkapp/rest/v1/person/similar">sim:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:request name="person-id-1" id="fab9f916-205c-417b-be2b-8f5c76373875" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
-  &lt;con:entry key="Accept" value="application/json"/>
-  &lt;con:entry key="Content-Type" value="application/json"/>
-&lt;/xml-fragment></con:setting></con:settings><con:endpoint>http://localhost:8080</con:endpoint><con:request>{
-  "person": {
-    "firstName": "Peter"
-  }
-}</con:request><con:originalUri>http://localhost/mkapp/rest/v1/person/similar</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:resource></con:resource></con:interface><con:testSuite id="737a9370-edad-4166-9752-f1e08cc01205" name="TestSuite - json">
-    <con:description>TestSuite generated for REST Service [http://localhost:8080]</con:description>
-    <con:settings/>
-    <con:runType>SEQUENTIAL</con:runType>
-    <con:testCase id="c38a8a47-c99f-48a7-9a11-42665fb33fe5" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customers_findLike TestCase" searchProperties="true">
-      <con:description>TestCase generated for REST Resource [Customers_findLike] located at [/find/customers]
-      </con:description>
-      <con:settings/>
-      
-      <con:loadTest id="b2927b19-d482-46cb-91cc-75a8dbe013ff" name="LoadTest 1">
-        <con:settings>
+    }
+    }
+</con:request>
+    <con:credentials>
+        <con:authType>No Authorization</con:authType>
+    </con:credentials>
+    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+    <con:jmsPropertyConfig/>
+    <con:parameters/>
+</con:request>
+</con:method>
+</con:resource>
+    <con:resource name="byId" path="persons/byId" id="e933d5d3-d5af-4192-9923-fa3d84a96a10">
+        <con:settings/>
+        <con:parameters>
+            <con:parameter>
+                <con:name>person</con:name>
+                <con:value/>
+                <con:style>QUERY</con:style>
+                <con:default/>
+                <con:description xsi:nil="true"/>
+            </con:parameter>
+        </con:parameters>
+        <con:method name="Method 1" id="e2741b91-ba55-4c48-956d-abc862ee8d93" method="POST">
+            <con:settings/>
+            <con:parameters/>
+            <con:representation type="FAULT">
+                <con:mediaType>application/json</con:mediaType>
+                <con:status>404</con:status>
+                <con:params/>
+            </con:representation>
+            <con:representation type="REQUEST">
+                <con:mediaType>application/json</con:mediaType>
+                <con:params/>
+            </con:representation>
+            <con:representation type="REQUEST">
+                <con:mediaType>application/protobuf</con:mediaType>
+                <con:params/>
+            </con:representation>
+            <con:representation type="REQUEST">
+                <con:mediaType>application/x-protobuf</con:mediaType>
+                <con:params/>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="REQUEST">
+                <con:mediaType>text/plain</con:mediaType>
+                <con:params/>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:representation type="FAULT">
+                <con:mediaType xsi:nil="true"/>
+                <con:status>404</con:status>
+                <con:params/>
+                <con:element>data</con:element>
+            </con:representation>
+            <con:request name="Request 1" id="42f9e9da-a8c3-45dc-9aab-50e01ce709d0" mediaType="multipart/form-data"
+                         postQueryString="false">
+                <con:settings>
+                    <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment
+                        xmlns:con="http://eviware.com/soapui/config">
+                        &lt;con:entry key="Accept" value="application/x-protobuf,applicaation/json"/>
+                        &lt;con:entry key="Content-Type" value="text/plain"/>
+                        &lt;/xml-fragment>
+                    </con:setting>
+                </con:settings>
+                <con:endpoint>http://localhost:8080</con:endpoint>
+                <con:request>{
+                    "person": {
+                    "id": "1"
+                    }
+                    }
+                </con:request>
+                <con:originalUri>http://localhost/mkapp/v1/persons/byId</con:originalUri>
+                <con:credentials>
+                    <con:authType>No Authorization</con:authType>
+                </con:credentials>
+                <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                <con:jmsPropertyConfig/>
+                <con:parameters>
+                    <entry key="person" value="{   &quot;person&quot;: {     &quot;id&quot;: &quot;1&quot;   } }"
+                           xmlns="http://eviware.com/soapui/config"/>
+                </con:parameters>
+                <con:parameterOrder>
+                    <con:entry>person</con:entry>
+                </con:parameterOrder>
+            </con:request>
+        </con:method>
+    </con:resource>
+</con:resource>
+    <con:resource name="v1" path="/mkapp/rest/v1" id="ec9545c1-972f-4976-a5fa-08dd07211061">
+        <con:settings/>
+        <con:parameters/>
+        <con:resource name="person" path="persons" id="661d11e6-be6c-49f7-8a0a-0e7f538be193">
+            <con:settings/>
+            <con:parameters>
+                <con:parameter>
+                    <con:name>id</con:name>
+                    <con:value/>
+                    <con:style>QUERY</con:style>
+                    <con:default/>
+                    <con:description xsi:nil="true"/>
+                </con:parameter>
+            </con:parameters>
+            <con:resource name="{id}" path="{id}" id="c900aa32-4286-4176-8476-7f31bb90d434">
+                <con:settings/>
+                <con:parameters>
+                    <con:parameter>
+                        <con:name>id</con:name>
+                        <con:value>id</con:value>
+                        <con:style>TEMPLATE</con:style>
+                        <con:default>id</con:default>
+                    </con:parameter>
+                </con:parameters>
+                <con:method name="byId" id="8c2ea520-df02-4dc0-b136-159dca00cd3c" method="GET">
+                    <con:settings/>
+                    <con:parameters/>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType>application/json</con:mediaType>
+                        <con:status>200</con:status>
+                        <con:params/>
+                        <con:element xmlns:ns="http://localhost/mkapp/rest/v1/persons/1">ns:Response</con:element>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType xsi:nil="true"/>
+                        <con:status>0</con:status>
+                        <con:params/>
+                        <con:element>data</con:element>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType xsi:nil="true"/>
+                        <con:status>0</con:status>
+                        <con:params/>
+                        <con:element>data</con:element>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType xsi:nil="true"/>
+                        <con:status>0</con:status>
+                        <con:params/>
+                        <con:element>data</con:element>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType xsi:nil="true"/>
+                        <con:status>0</con:status>
+                        <con:params/>
+                        <con:element>data</con:element>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType xsi:nil="true"/>
+                        <con:status>0</con:status>
+                        <con:params/>
+                        <con:element>data</con:element>
+                    </con:representation>
+                    <con:representation type="FAULT">
+                        <con:mediaType>text/html; charset=utf-8</con:mediaType>
+                        <con:status>500</con:status>
+                        <con:params/>
+                        <con:element>html</con:element>
+                    </con:representation>
+                    <con:request name="id_1_exists" id="b97712a2-20d8-4881-943e-473975da75e1"
+                                 mediaType="application/json">
+                        <con:settings>
+                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                        </con:settings>
+                        <con:endpoint>http://localhost:8080</con:endpoint>
+                        <con:request/>
+                        <con:originalUri>http://localhost/mkapp/rest/v1/persons/1</con:originalUri>
+                        <con:credentials>
+                            <con:authType>No Authorization</con:authType>
+                        </con:credentials>
+                        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                        <con:jmsPropertyConfig/>
+                        <con:parameters>
+                            <entry key="id" value="1" xmlns="http://eviware.com/soapui/config"/>
+                        </con:parameters>
+                    </con:request>
+                    <con:request name="id_99_NoExists" id="b97712a2-20d8-4881-943e-473975da75e1"
+                                 mediaType="application/json">
+                        <con:settings>
+                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                        </con:settings>
+                        <con:endpoint>http://localhost:8080</con:endpoint>
+                        <con:request/>
+                        <con:originalUri>http://localhost/mkapp/rest/v1/persons/1</con:originalUri>
+                        <con:credentials>
+                            <con:authType>No Authorization</con:authType>
+                        </con:credentials>
+                        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                        <con:jmsPropertyConfig/>
+                        <con:parameters>
+                            <entry key="id" value="99" xmlns="http://eviware.com/soapui/config"/>
+                        </con:parameters>
+                    </con:request>
+                </con:method>
+            </con:resource>
+            <con:method name="getAll" id="ce6bbe51-f8eb-4a9e-858f-50ffa77a5d5e" method="GET">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element>Response</con:element>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType>text/html; charset=utf-8</con:mediaType>
+                    <con:status>500</con:status>
+                    <con:params/>
+                    <con:element>html</con:element>
+                </con:representation>
+                <con:representation type="FAULT">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>404</con:status>
+                    <con:params/>
+                </con:representation>
+                <con:request name="Request 1" id="e2383a8c-d047-4724-ad58-54cc34be1059" mediaType="application/json">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request/>
+                    <con:originalUri>http://localhost/mkapp/rest/v1/persons</con:originalUri>
+                    <con:credentials>
+                        <con:authType>No Authorization</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters>
+                        <entry key="id" value="" xmlns="http://eviware.com/soapui/config"/>
+                    </con:parameters>
+                    <con:parameterOrder>
+                        <con:entry>id</con:entry>
+                    </con:parameterOrder>
+                </con:request>
+            </con:method>
+            <con:method name="create" id="fc651d23-9308-45b9-9783-308c7dc0ff10" method="POST">
+                <con:settings/>
+                <con:parameters/>
+                <con:representation type="RESPONSE">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:status>200</con:status>
+                    <con:params/>
+                    <con:element xmlns:per="http://localhost/mkapp/rest/v1/persons">per:Response</con:element>
+                </con:representation>
+                <con:representation type="REQUEST">
+                    <con:mediaType>application/json</con:mediaType>
+                    <con:params/>
+                </con:representation>
+                <con:request name="Request 1" id="cc23592e-5b6d-439e-8871-3c28c7452c45" mediaType="application/json"
+                             postQueryString="false">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request>{
+                        "person" : {
+                        "firstName" : "Dumpling1"
+                        }
+                        }
+                    </con:request>
+                    <con:originalUri>http://localhost/mkapp/rest/v1/persons</con:originalUri>
+                    <con:credentials>
+                        <con:authType>No Authorization</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters>
+                        <entry key="id" value="" xmlns="http://eviware.com/soapui/config"/>
+                    </con:parameters>
+                    <con:parameterOrder>
+                        <con:entry>id</con:entry>
+                    </con:parameterOrder>
+                </con:request>
+            </con:method>
+            <con:method name="update" id="a7eeeae4-b08a-44e5-92b3-88b978126efc" method="PATCH">
+                <con:settings/>
+                <con:parameters/>
+                <con:request name="Request 1" id="f497ee07-5e2f-4a55-a5d3-2c4bd89456bf" mediaType="application/json"
+                             postQueryString="false">
+                    <con:settings>
+                        <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/>
+                        </con:setting>
+                    </con:settings>
+                    <con:endpoint>http://localhost:8080</con:endpoint>
+                    <con:request>{
+                        "person" : {
+                        "firstName" : "Dumpling1"
+                        }
+                        }
+                    </con:request>
+                    <con:credentials>
+                        <con:authType>No Authorization</con:authType>
+                    </con:credentials>
+                    <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                    <con:jmsPropertyConfig/>
+                    <con:parameters/>
+                </con:request>
+            </con:method>
+        </con:resource>
+        <con:resource name="search" path="search" id="cb9548d2-964e-4a38-93bf-9fb749ecdf9c">
+            <con:settings/>
+            <con:parameters/>
+            <con:resource name="persons" path="persons" id="c1abd29e-2760-474d-ac95-f8ef5615d2b6">
+                <con:settings/>
+                <con:parameters/>
+                <con:method name="findPersonsLike" id="09950427-5498-4028-bfc9-04ea91d27c67" method="POST">
+                    <con:settings/>
+                    <con:parameters/>
+                    <con:representation type="REQUEST">
+                        <con:mediaType>application/json</con:mediaType>
+                        <con:params/>
+                    </con:representation>
+                    <con:representation type="RESPONSE">
+                        <con:mediaType>application/json</con:mediaType>
+                        <con:status>200</con:status>
+                        <con:params/>
+                        <con:element xmlns:per="http://localhost/mkapp/rest/v1/search/persons">per:Response
+                        </con:element>
+                    </con:representation>
+                    <con:request name="Request 1" id="85f80dab-c966-436d-98f0-928548e00faf" mediaType="application/json"
+                                 postQueryString="false">
+                        <con:settings>
+                            <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+                        </con:settings>
+                        <con:endpoint>http://localhost:8080</con:endpoint>
+                        <con:request>{
+                            "person": {
+                            "firstName": "Peter"
+                            }
+                            }
+                        </con:request>
+                        <con:originalUri>http://localhost/mkapp/rest/v1/search/persons</con:originalUri>
+                        <con:credentials>
+                            <con:authType>No Authorization</con:authType>
+                        </con:credentials>
+                        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+                        <con:jmsPropertyConfig/>
+                        <con:parameters/>
+                    </con:request>
+                </con:method>
+            </con:resource>
+        </con:resource>
+    </con:resource>
+</con:interface>
+    <con:testSuite id="737a9370-edad-4166-9752-f1e08cc01205" name="TestSuite - json">
+        <con:description>TestSuite generated for REST Service [http://localhost:8080]</con:description>
+        <con:settings/>
+        <con:runType>SEQUENTIAL</con:runType>
+        <con:testCase id="c38a8a47-c99f-48a7-9a11-42665fb33fe5" failOnError="true" failTestCaseOnErrors="true"
+                      keepSession="false" maxResults="0" name="Customers_findLike TestCase" searchProperties="true">
+            <con:description>TestCase generated for REST Resource [Customers_findLike] located at [/find/customers]
+            </con:description>
+            <con:settings/>
+
+            <con:loadTest id="b2927b19-d482-46cb-91cc-75a8dbe013ff" name="LoadTest 1">
+                <con:settings>
           <con:setting id="HttpSettings@close-connections">false</con:setting>
         </con:settings>
         <con:threadCount>5</con:threadCount>

@@ -5,6 +5,7 @@ import muni.model.Model;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.Collection;
+import java.util.Optional;
 
 @ApplicationScoped
 public class AppIntegRepo implements PersonRepo {
@@ -13,7 +14,7 @@ public class AppIntegRepo implements PersonRepo {
 //    AgroalDataSource dataSource;
 
     @Override
-    public Model.Person get(String id) {
+    public Optional<Model.Person> get(String id) {
         return null;
     }
 
