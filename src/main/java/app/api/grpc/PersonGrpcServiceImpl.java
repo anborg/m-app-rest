@@ -24,25 +24,30 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
 
     @Override
     public void create(MuniService.CreatePersonReq req, StreamObserver<Model.Person> resObs) {
-        System.out.println(req);
+        //System.out.println(req);
         final Model.Person savedPerson = integSvc.person().save(req.getPerson());
         resObs.onNext(Model.Person.newBuilder(savedPerson).build());
         resObs.onCompleted();
     }
 
     @Override
+    public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
+        System.out.println(req);
+        Model.Person res = integSvc.person().update(req);
+        resObs.onNext(res);//TODO handle not found
+        resObs.onCompleted();
+    }
+
+    @Override
     public void get(MuniService.ById req, StreamObserver<Model.Person> resObs) {
-        System.out.println("PersonGrpc personById " + req);
+        //System.out.println("PersonGrpc personById " + req);
         String id = req.getId();
         Optional<Model.Person> res = integSvc.person().get(id); //TODO handle not found
-        //res.ifPresent();
         if (res.isPresent()) {
             resObs.onNext(res.get());
         } else {
             resObs.onNext(null);
         }
-        System.out.println("PersonGrpc " + res);
-
         resObs.onCompleted();
     }
 
@@ -68,11 +73,5 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
         resObs.onCompleted();
     }
 
-    @Override
-    public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
-        System.out.println(req);
-        Model.Person res = integSvc.person().save(req);
-        resObs.onNext(res);//TODO handle not found
-        resObs.onCompleted();
-    }
+
 }

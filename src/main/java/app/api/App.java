@@ -5,7 +5,6 @@ import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import javax.ws.rs.ConstrainedTo;
 import javax.ws.rs.core.Application;
 @OpenAPIDefinition(
         tags ={
@@ -22,6 +21,7 @@ import javax.ws.rs.core.Application;
 
         )
 )
+//@ApplicationPath("/mkapp/rest/v1") //TODO, make note this path here does not get appended to xxResource classes!
 public class App extends Application {
 
 

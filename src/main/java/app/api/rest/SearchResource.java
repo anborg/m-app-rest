@@ -3,7 +3,6 @@ package app.api.rest;
 import com.google.protobuf.InvalidProtocolBufferException;
 import io.quarkus.grpc.runtime.annotations.GrpcService;
 import muni.model.MuniService;
-import muni.model.PersonServiceGrpc;
 import muni.model.SearchServiceGrpc;
 import muni.util.ProtoUtil;
 
@@ -18,12 +17,6 @@ import javax.ws.rs.core.Response;
 @Path("/mkapp/rest/v1")
 public class SearchResource {
 
-    @Inject
-    @GrpcService("grpc-person")
-    PersonServiceGrpc.PersonServiceBlockingStub personSvc;
-    @Inject
-    @GrpcService("grpc-case")
-    PersonServiceGrpc.PersonServiceBlockingStub caseSvc;
 
     @Inject
     @GrpcService("grpc-search")

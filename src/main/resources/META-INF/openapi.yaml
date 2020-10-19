@@ -1,0 +1,406 @@
+openapi: 3.0.0
+tags:
+  - name: test
+info:
+  title: api-mkapp
+  version: '1.0'
+  description: API that provides interface to mkm objects. To be implemented by mkapp service
+  license:
+    name: MIT - anyone can use it.
+  contact:
+    name: prem
+    email: myteam@test.com
+servers:
+  - description: ''
+    url: 'http://localhost:8080/mkapp/rest/v1'
+paths:
+  /persons:
+    get:
+      summary: Person - get recent
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+      operationId: get-persons
+      description: 'Get a list of persons (recently created/modified). '
+    parameters: []
+    post:
+      summary: Person - create
+      operationId: post-persons
+      responses:
+        '200':
+          description: OK
+      description: Create a new person (account)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+            examples:
+              1-min:
+                value:
+                  firstName: Prem
+                  lastName: Test
+                  email: prem@gmail.com
+                  address:
+                    streetNum: '123'
+                    streetName: My Street
+                    postalCode: L1B 0Z0
+        description: 'Mandatory for person: first/lastname and one contact. Mandatory for address: streetnum/streetname/postalcode. NO id, NO create/update timestamp '
+    patch:
+      summary: Person - update
+      operationId: patch-persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+              examples: {}
+      description: Modify details of a person
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+            examples:
+              1-lastname:
+                value:
+                  createTime: '2020-10-18T19:46:56Z'
+                  updateTime: '2020-10-18T19:46:56Z'
+                  id: 1
+                  lastName: Lastname-updated
+              example-2:
+                value:
+                  createTime: '2020-10-18T19:37:24Z'
+                  updateTime: '2020-10-18T19:37:24Z'
+                  id: 1
+                  lastname: LN-addr-updated
+                  address:
+                    createTime: '2020-10-18T19:37:24Z'
+                    updateTime: '2020-10-18T19:37:24Z'
+                    id: 0
+                    lat: 0
+                    lon: 0
+                    oneline: string
+                    streetNum: string
+                    streetName: string
+                    city: string
+                    country: string
+                    postalCode: string
+                    state: string
+        description: ''
+  '/persons/{id}':
+    parameters:
+      - schema:
+          type: number
+          example: 1
+          minimum: 0
+        name: id
+        in: path
+        required: true
+        description: ''
+    get:
+      summary: Person - by id
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+      operationId: get-persons-id
+      description: Get one person - by id
+      parameters: []
+  '/cases/{id}':
+    parameters:
+      - schema:
+          type: number
+          example: 1
+          minimum: 0
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Case - by id
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+              examples: {}
+      operationId: get-case-id
+  /search/persons:
+    post:
+      summary: Search - persons similar
+      operationId: post-search-persons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+      description: ''
+  /search/persons/byaddress:
+    post:
+      summary: Search - person by address
+      operationId: post-search-persons-byaddress
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostalAddress'
+  /cases:
+    get:
+      summary: Case - get recent
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+      operationId: get-case
+    post:
+      summary: Case - create
+      operationId: post-case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+    patch:
+      summary: Case - update
+      operationId: patch-case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+components:
+  schemas:
+    Person:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            firstname:
+              type: string
+            lastname:
+              type: string
+            email:
+              type: string
+              format: email
+              default: me@gmail.com
+              example: me@gmail.com
+            phone1:
+              type: string
+            phone2:
+              type: string
+            address:
+              $ref: '#/components/schemas/PostalAddress'
+      title: Person
+      description: ''
+      x-examples:
+        1-ex:
+          _id: '1'
+          _timestamp_created: '2020-09-14T14:52:56.782Z'
+          _timestamp_updated: '2020-09-14T14:52:56.782Z'
+          first_name: jane
+          last_name: doe
+          contact_channels:
+            email: jane@gmail.com
+            phone1:
+              country_code: '1'
+              num: '1234567890'
+              ext: '112'
+            address:
+              _id: '55'
+              lat: 43.856573
+              lng: -79.337089
+              oneline: '101 Town Centre Blvd, Markham, ON L3R 9W3'
+              num: '101'
+              street: Town Centre Blvd
+              city: Markham
+              state: 'ON'
+              country: Canada
+              postal_code: L3R9W3
+              _timestamp_created: '2020-09-14T14:52:56.782Z'
+              _timestamp_updated: '2020-09-14T14:52:56.782Z'
+    AbstractEntity:
+      title: AbstractEntity
+      type: object
+      description: |-
+        Add to this, all common fields accross "real" mkm entities. I mean 'real' as 'entities that go into separate table'. 
+
+        Example scenario: 
+
+        If today 'address' is stored in CUSTOMER table, do not derive from AbstractEntity.
+
+        If in future 'address' is stored in ADDRESS table separately, then you MUST do equivalent of 'Address extends AbstractEntity'
+      properties:
+        createTime:
+          type: string
+          readOnly: true
+          description: Read-only. DB is responsible for timestamp.
+          example: '2020-10-18T03:11:56Z'
+          format: date-time
+        updateTIme:
+          type: string
+          readOnly: true
+          description: Read-only. DB is responsible for timestamp.
+          format: date-time
+          example: '2020-10-18T03:11:56Z'
+        id:
+          type: number
+          readOnly: true
+          description: Read-only. DB is responsible for private _id.
+          example: 1
+    ContactChannels:
+      title: ContactChannels
+      x-examples:
+        1-phone1:
+          phone1:
+            num: '1234567890'
+        2-full:
+          email: jane@gmail.com
+          phone1:
+            country_code: '91'
+            num: '1234567890'
+            ext: '202'
+          phone2:
+            country_code: '1'
+            num: '6471112223333'
+            ext: '123'
+          address:
+            lat: 43.856573
+            lng: -79.337089
+            oneline: '101 Town Centre Blvd, Markham, ON L3R 9W3'
+            num: '101'
+            street: Town Centre Blvd
+            city: Markham
+            state: Ontario
+            country: Canada
+            postal_code: L3R9W3
+      anyOf:
+        - properties:
+            email:
+              type: string
+            phone1:
+              $ref: '#/components/schemas/Phone'
+            phone2:
+              $ref: '#/components/schemas/Phone'
+            postalAddress:
+              $ref: '#/components/schemas/PostalAddress'
+      type: object
+    PostalAddress:
+      title: PostalAddress
+      allOf:
+        - $ref: '#/components/schemas/AbstractGeoEntity'
+        - type: object
+          properties:
+            oneline:
+              type: string
+            streetNum:
+              type: string
+            streetName:
+              type: string
+            city:
+              type: string
+            country:
+              type: string
+            postalCode:
+              type: string
+            state:
+              type: string
+      description: 'Address extends AbstractEntity. '
+      x-examples:
+        1-min:
+          oneline: '101, Town Center Blvd, Markham, ON, Canada'
+          postalcode: L3R9W3
+        2-full:
+          oneline: '101 Town Centre BlvdMarkham, ON L3R 9W3'
+          streetnum: '101'
+          streetname: Town Centre Blvd
+          city: Markham
+          state: Ontario
+          country: Canada
+          postalcode: L3R9W3
+          lat: 43.856573
+          lng: -79.337089
+        example-3:
+          ts_created: string
+          ts_updated: string
+          id: string
+          lat: 0
+          lon: 0
+          oneline: string
+          streetnum: string
+          streetname: string
+          city: string
+          country: string
+          postalcode: string
+          state: string
+    AbstractGeoEntity:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            lat:
+              type: number
+              example: 27.1751
+              default: 27.1751
+            lon:
+              type: number
+              default: 78.0421
+              example: 78.0421
+      description: 'Geo coordinates. Use for any geologically identifiable entities  '
+    Case:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            '':
+              type: string
+    Phone:
+      title: Phone
+      type: object
+      properties:
+        id:
+          type: string
