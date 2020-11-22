@@ -1,11 +1,11 @@
 package app.api.grpc;
 
+import access.integ.IntegService;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.PersonServiceGrpc;
-import muni.service.SubsystemService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -20,12 +20,12 @@ import java.util.Optional;
 public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBase {
     //    PersonRepo repo = new MockRepoImpl();
     @Named("integ-service")
-    SubsystemService integSvc;
+    IntegService integSvc;
 
     @Override
     public void create(MuniService.CreatePersonReq req, StreamObserver<Model.Person> resObs) {
         //System.out.println(req);
-        final Model.Person savedPerson = integSvc.person().save(req.getPerson());
+        final Model.Person savedPerson = integSvc.create(req.getPerson());
         resObs.onNext(Model.Person.newBuilder(savedPerson).build());
         resObs.onCompleted();
     }
@@ -33,7 +33,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     @Override
     public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
         System.out.println(req);
-        Model.Person res = integSvc.person().update(req);
+        Model.Person res = integSvc.update(req);
         resObs.onNext(res);//TODO handle not found
         resObs.onCompleted();
     }
@@ -42,13 +42,28 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     public void get(MuniService.ById req, StreamObserver<Model.Person> resObs) {
         //System.out.println("PersonGrpc personById " + req);
         String id = req.getId();
-        Optional<Model.Person> res = integSvc.person().get(id); //TODO handle not found
+        Optional<Model.Person> res = integSvc.getPerson(id); //TODO handle not found
         if (res.isPresent()) {
             resObs.onNext(res.get());
         } else {
             resObs.onNext(null);
         }
         resObs.onCompleted();
+    }
+
+    @Override
+    public void xrefAdd(Model.Xref request, StreamObserver<Model.Xref> responseObserver) {
+        super.xrefAdd(request, responseObserver);
+    }
+
+    @Override
+    public void xrefUpdate(Model.Xref request, StreamObserver<Model.Xref> responseObserver) {
+        super.xrefUpdate(request, responseObserver);
+    }
+
+    @Override
+    public void xrefSync(Model.Xref request, StreamObserver<Model.Xref> responseObserver) {
+        super.xrefSync(request, responseObserver);
     }
 
     @Operation(
@@ -69,7 +84,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     @Override
     public void getAll(Empty req, StreamObserver<MuniService.PersonList> resObs) {
         System.out.println(req);
-        resObs.onNext(MuniService.PersonList.newBuilder().addAllPersons(integSvc.person().recent()).build());
+        resObs.onNext(MuniService.PersonList.newBuilder().addAllPersons(integSvc.personsRecent()).build());
         resObs.onCompleted();
     }
 

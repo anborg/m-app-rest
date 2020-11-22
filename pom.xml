@@ -68,16 +68,16 @@
       <artifactId>lib-integ</artifactId>
       <version>${integ.version}</version>
     </dependency>
-    <dependency>
-      <groupId>mkm</groupId>
+    <!--dependency>
+      <groupId>m</groupId>
       <artifactId>lib-amanda</artifactId>
       <version>${amanda.version}</version>
     </dependency>
     <dependency>
-      <groupId>mkm</groupId>
+      <groupId>m</groupId>
       <artifactId>lib-hansen</artifactId>
       <version>${hansen.version}</version>
-    </dependency>
+    </dependency -->
 
     <dependency>
       <groupId>io.quarkus</groupId>

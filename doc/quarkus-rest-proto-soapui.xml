@@ -593,10 +593,10 @@
 
             <con:loadTest id="b2927b19-d482-46cb-91cc-75a8dbe013ff" name="LoadTest 1">
                 <con:settings>
-          <con:setting id="HttpSettings@close-connections">false</con:setting>
-        </con:settings>
-        <con:threadCount>5</con:threadCount>
-        <con:startDelay>0</con:startDelay>
+                    <con:setting id="HttpSettings@close-connections">false</con:setting>
+                </con:settings>
+                <con:threadCount>5</con:threadCount>
+                <con:startDelay>0</con:startDelay>
         <con:sampleInterval>250</con:sampleInterval>
         <con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed>
         <con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange>
