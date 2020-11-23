@@ -3,20 +3,11 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>mkm</groupId>
+  <groupId>m</groupId>
   <artifactId>app-rest</artifactId>
-  <version>1.0.0</version>
-  <!--  <parent>-->
-  <!--    <groupId>mkm</groupId>-->
-  <!--    <artifactId>mkm-app-parent</artifactId>-->
-  <!--    <version>1.0-SNAPSHOT</version>-->
-  <!--  </parent>-->
-
+  <version>1.0-SNAPSHOT</version>
   <properties>
-    <muni-model.version>1.0-SNAPSHOT</muni-model.version>
-    <integ.version>1.0-SNAPSHOT</integ.version>
-    <amanda.version>1.0-SNAPSHOT</amanda.version>
-    <hansen.version>1.0-SNAPSHOT</hansen.version>
+    <version>1.0-SNAPSHOT</version>
 
 
     <compiler-plugin.version>3.8.0</compiler-plugin.version>
@@ -36,18 +27,15 @@
     <quarkus.platform.version>1.8.1.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
-        <version>${quarkus.platform.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+
   <dependencies>
+    <dependency>
+      <groupId>m</groupId>
+      <artifactId>lib-integ</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+
     <!--
     ANTLR Tool version 4.7.2 used for code generation does not match the current runtime version 4.8
     "org.antlr:antlr4-runtime:4.7.2" -->
@@ -58,36 +46,16 @@
       <scope>runtime</scope>
     </dependency>
 
-    <dependency>
-      <groupId>muni</groupId>
-      <artifactId>muni-api-protogen</artifactId>
-      <version>${muni-model.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>m</groupId>
-      <artifactId>lib-integ</artifactId>
-      <version>${integ.version}</version>
-    </dependency>
-    <!--dependency>
-      <groupId>m</groupId>
-      <artifactId>lib-amanda</artifactId>
-      <version>${amanda.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>m</groupId>
-      <artifactId>lib-hansen</artifactId>
-      <version>${hansen.version}</version>
-    </dependency -->
 
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-h2</artifactId>
     </dependency>
-    <!--    <dependency>-->
-    <!--      <groupId>com.oracle.database.jdbc</groupId>-->
-    <!--      <artifactId>ojdbc8</artifactId>-->
-    <!--      <version>19.6.0.0</version>-->
-    <!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>com.oracle.database.jdbc</groupId>-->
+<!--      <artifactId>ojdbc10</artifactId>-->
+<!--      <version>19.8.0.0</version>-->
+<!--    </dependency>-->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-agroal</artifactId>
@@ -150,13 +118,7 @@
   </dependencies>
   <build>
     <extensions>
-<!--      <extension>-->
-<!--        <groupId>kr.motd.maven</groupId>-->
-<!--        <artifactId>os-maven-plugin</artifactId>-->
-<!--        <version>${os-maven-plugin.version}</version>-->
-<!--      </extension>-->
     </extensions>
-
     <plugins>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -258,4 +220,15 @@
       </build>
     </profile>
   </profiles>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
