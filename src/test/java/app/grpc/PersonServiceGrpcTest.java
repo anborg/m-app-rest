@@ -11,14 +11,14 @@ import javax.inject.Inject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-//@QuarkusTest
+@QuarkusTest
 public class PersonServiceGrpcTest {
 
   @Inject
   @GrpcService("grpc-person")
   PersonServiceGrpc.PersonServiceBlockingStub personSvc;
 
-//  @Test
+  @Test
   public void getPersons() throws Exception {
     Model.Person p = personSvc.get(MuniService.ById.newBuilder().setId("1").build());
     System.out.println(p);

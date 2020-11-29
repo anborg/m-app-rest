@@ -1,6 +1,7 @@
 package app;
 
 import access.integ.IntegService;
+import app.api.rest.PersonResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.common.http.TestHTTPEndpoint;
@@ -15,8 +16,8 @@ import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 
-//@QuarkusTest
-//@TestHTTPEndpoint(PersonResource.class)
+@QuarkusTest
+@TestHTTPEndpoint(PersonResource.class)
 public class PersonResourceTest {
     @Named("integ-service")
     IntegService integSvc;
@@ -43,7 +44,7 @@ public class PersonResourceTest {
 //        assertEquals(mapper.readTree(jsonOut), mapper.readTree(jsonExpect));
     }
 
-//    @Test
+    @Test
     public void personById() throws JsonProcessingException {
         //prepare an obj using data service
         String id = "1";
