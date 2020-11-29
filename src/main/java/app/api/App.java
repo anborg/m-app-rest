@@ -23,6 +23,4 @@ import javax.ws.rs.core.Application;
 )
 //@ApplicationPath("/mkapp/rest/v1") //TODO, make note this path here does not get appended to xxResource classes!
 public class App extends Application {
-
-
 }

@@ -117,6 +117,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Person'
+        '404':
+          description: Not Found
       operationId: get-persons-id
       description: Get one person - by id
       parameters: []
@@ -140,6 +142,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Case'
               examples: {}
+        '404':
+          description: Not Found
       operationId: get-case-id
   /search/persons:
     post:
@@ -235,6 +239,10 @@ components:
               type: string
             address:
               $ref: '#/components/schemas/PostalAddress'
+            xrefs:
+              type: array
+              items:
+                $ref: '#/components/schemas/Xref'
       title: Person
       description: ''
       x-examples:
@@ -329,6 +337,7 @@ components:
             postalAddress:
               $ref: '#/components/schemas/PostalAddress'
       type: object
+      description: Currently NOT used
     PostalAddress:
       title: PostalAddress
       allOf:
@@ -396,11 +405,59 @@ components:
         - $ref: '#/components/schemas/AbstractEntity'
         - type: object
           properties:
+            status:
+              type: string
+              description: 'BACKLOG, INPROGRESS, WAITING, DONE'
+            description:
+              type: string
+            tags:
+              type: array
+              description: 'store a list of tags that helps routing, categorizing, reporting'
+              items:
+                type: string
+            reportedByCustomer:
+              $ref: '#/components/schemas/Person'
+            createdByEmployee:
+              $ref: '#/components/schemas/Person'
+            xrefs:
+              type: array
+              description: A list of subsystems addressing this case
+              items:
+                $ref: '#/components/schemas/Xref'
+            eventAddress:
+              $ref: '#/components/schemas/PostalAddress'
             '':
               type: string
+      description: Case
     Phone:
       title: Phone
       type: object
       properties:
         id:
           type: string
+      description: Currently NOT used.
+    Xref:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            id:
+              type: string
+              description: 'This id is not from db, would be supplied on insert.'
+            xrefSystemId:
+              type: string
+            xrefId:
+              type: string
+            subsysRefreshTime:
+              type: string
+              format: date-time
+      description: ''
+      title: ''
+      x-examples:
+        example-1:
+          createTime: '2020-10-18T03:11:56Z'
+          updateTIme: '2020-10-18T03:11:56Z'
+          id: 1
+          xrefSystemId: string
+          xrefId: string
+          subsysRefreshTime: '2019-08-24T14:15:22Z'

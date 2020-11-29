@@ -7,7 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 import java.util.Optional;
 
-@ApplicationScoped
+@Deprecated
+//@ApplicationScoped
 public class AppIntegRepo implements PersonRepo {
 //    @Inject
 //    @Named("appinteg")

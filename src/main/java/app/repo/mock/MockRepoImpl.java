@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-
+@Deprecated
 public class MockRepoImpl implements PersonRepo {
     static List<Model.Person> list = Arrays.asList(
             MockUtil.buildPerson("1","Jane", "Doe"),

@@ -11,21 +11,25 @@
 
 
     <compiler-plugin.version>3.8.0</compiler-plugin.version>
-    <grpc.version>1.29.0</grpc.version>
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
-    <protobuf.version>3.11.1</protobuf.version>
-    <protoc.version>3.13.0</protoc.version>
+
     <quarkus-plugin.version>1.8.1.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>1.8.1.Final</quarkus.platform.version>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+    <!-- grpc group -->
+
+    <protobuf.version>3.11.1</protobuf.version>
+    <protoc.version>3.13.0</protoc.version>
+    <grpc.version>1.30.2</grpc.version>
+    <protobuf-maven-plugin.version>0.6.1</protobuf-maven-plugin.version>
+
   </properties>
 
   <dependencies>
@@ -61,16 +65,18 @@
       <artifactId>quarkus-agroal</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
-      <version>${protobuf.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java-util</artifactId>
-      <version>${protobuf.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>com.google.protobuf</groupId>-->
+<!--      <artifactId>protobuf-java</artifactId>-->
+<!--      <version>${protobuf.version}</version>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>com.google.protobuf</groupId>-->
+<!--      <artifactId>protobuf-java-util</artifactId>-->
+<!--      <version>${protobuf.version}</version>-->
+<!--    </dependency>-->
+
     <!--    <dependency>-->
     <!--      <groupId>io.quarkus</groupId>-->
     <!--      <artifactId>quarkus-smallrye-openapi</artifactId>-->
@@ -91,6 +97,13 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-grpc</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
+
+    <!-- test only -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -112,8 +125,9 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-openapi</artifactId>
+      <groupId>io.grpc</groupId>
+      <artifactId>grpc-testing</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -181,23 +195,23 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>${surefire-plugin.version}</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-                <configuration>
-                  <systemPropertyVariables>
-                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
-                  </systemPropertyVariables>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
+<!--          <plugin>-->
+<!--            <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--            <version>${surefire-plugin.version}</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <goals>-->
+<!--                  <goal>integration-test</goal>-->
+<!--                  <goal>verify</goal>-->
+<!--                </goals>-->
+<!--                <configuration>-->
+<!--                  <systemPropertyVariables>-->
+<!--                    <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>-->
+<!--                  </systemPropertyVariables>-->
+<!--                </configuration>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
           <plugin>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-maven-plugin</artifactId>
@@ -211,11 +225,24 @@
                 <configuration>
                   <cleanupServer>true</cleanupServer>
                   <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                  <graalvmHome>${graalvmHome}</graalvmHome>
+<!--                  <graalvmHome>${graalvmHome}</graalvmHome>-->
                 </configuration>
               </execution>
             </executions>
           </plugin>
+<!--          <plugin>-->
+<!--            <groupId>org.jboss.jandex</groupId>-->
+<!--            <artifactId>jandex-maven-plugin</artifactId>-->
+<!--            <version>1.0.8</version>-->
+<!--            <executions>-->
+<!--              <execution>-->
+<!--                <id>make-index</id>-->
+<!--                <goals>-->
+<!--                  <goal>jandex</goal>-->
+<!--                </goals>-->
+<!--              </execution>-->
+<!--            </executions>-->
+<!--          </plugin>-->
         </plugins>
       </build>
     </profile>
@@ -226,6 +253,13 @@
         <groupId>${quarkus.platform.group-id}</groupId>
         <artifactId>${quarkus.platform.artifact-id}</artifactId>
         <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-bom</artifactId>
+        <version>${grpc.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

@@ -1,19 +1,20 @@
 package app.api.grpc;
 
-import app.repo.PersonRepo;
-import app.repo.mock.MockRepoImpl;
+import access.integ.IntegService;
 import io.grpc.stub.StreamObserver;
 import muni.model.CaseServiceGrpc;
 import muni.model.Model;
 import muni.model.MuniService;
 import muni.util.MockUtil;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Singleton
 public class CaseGrpcServiceImpl extends CaseServiceGrpc.CaseServiceImplBase {
 
-    PersonRepo repo = new MockRepoImpl();
+    @Named("integ-service")
+    IntegService integSvc;
 
     @Override
     public void get(MuniService.ById req, StreamObserver<Model.Case> resObs) {

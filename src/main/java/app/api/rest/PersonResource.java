@@ -36,7 +36,8 @@ public class PersonResource {
     public Response get(@PathParam("id") Long id) throws InvalidProtocolBufferException {
         var rpcReq = MuniService.ById.newBuilder().setId("" + id).build();
         Model.Person res = personSvc.get(rpcReq);
-        return Objects.nonNull(res) ? Response.ok(res).build() : Response.status(Response.Status.NOT_FOUND).build();
+        System.out.println("get obj hasId="+res.hasId());
+        return res.hasId() ? Response.ok(res).build() : Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST
