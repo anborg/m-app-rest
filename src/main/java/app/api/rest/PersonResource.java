@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Objects;
 import java.util.Optional;
 
 @Path("/mkapp/rest/v1")
@@ -28,7 +27,7 @@ public class PersonResource {
     @Path("persons")
     public Response getAll() throws InvalidProtocolBufferException {
         MuniService.PersonList res = personSvc.getAll(Empty.getDefaultInstance());
-        return Response.ok(res.getPersonsList()).build();
+        return Response.ok(res.getPersonsList()).header("X-Total-Count", res.getPersonsCount()).build();
     }
 
     @GET
