@@ -6,13 +6,13 @@ info:
   version: '1.0'
   description: API that provides interface to mkm objects. To be implemented by mkapp service
   license:
-    name: MIT - anyone can use it.
+    name: MIT
   contact:
     name: prem
     email: myteam@test.com
 servers:
   - description: ''
-    url: 'http://localhost:8080/mkapp/rest/v1'
+    url: 'http://localhost:8082/mkapp/rest/v1'
 paths:
   /persons:
     get:
@@ -27,6 +27,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Person'
+        '500':
+          description: Internal Server Error
       operationId: get-persons
       description: 'Get a list of persons (recently created/modified). '
     parameters: []
@@ -36,6 +38,10 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
       description: Create a new person (account)
       requestBody:
         content:
@@ -97,6 +103,10 @@ paths:
                     postalCode: string
                     state: string
         description: ''
+    put:
+      summary: ''
+      operationId: put-persons
+      description: ''
   '/persons/{id}':
     parameters:
       - schema:
@@ -122,6 +132,21 @@ paths:
       operationId: get-persons-id
       description: Get one person - by id
       parameters: []
+    put:
+      summary: ''
+      operationId: put-persons-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: 'update(replace) a person, for id in path'
   '/cases/{id}':
     parameters:
       - schema:
@@ -245,32 +270,6 @@ components:
                 $ref: '#/components/schemas/Xref'
       title: Person
       description: ''
-      x-examples:
-        1-ex:
-          _id: '1'
-          _timestamp_created: '2020-09-14T14:52:56.782Z'
-          _timestamp_updated: '2020-09-14T14:52:56.782Z'
-          first_name: jane
-          last_name: doe
-          contact_channels:
-            email: jane@gmail.com
-            phone1:
-              country_code: '1'
-              num: '1234567890'
-              ext: '112'
-            address:
-              _id: '55'
-              lat: 43.856573
-              lng: -79.337089
-              oneline: '101 Town Centre Blvd, Markham, ON L3R 9W3'
-              num: '101'
-              street: Town Centre Blvd
-              city: Markham
-              state: 'ON'
-              country: Canada
-              postal_code: L3R9W3
-              _timestamp_created: '2020-09-14T14:52:56.782Z'
-              _timestamp_updated: '2020-09-14T14:52:56.782Z'
     AbstractEntity:
       title: AbstractEntity
       type: object
@@ -283,6 +282,11 @@ components:
 
         If in future 'address' is stored in ADDRESS table separately, then you MUST do equivalent of 'Address extends AbstractEntity'
       properties:
+        id:
+          type: number
+          readOnly: true
+          description: Read-only. DB is responsible for private _id.
+          example: 1
         createTime:
           type: string
           readOnly: true
@@ -295,37 +299,8 @@ components:
           description: Read-only. DB is responsible for timestamp.
           format: date-time
           example: '2020-10-18T03:11:56Z'
-        id:
-          type: number
-          readOnly: true
-          description: Read-only. DB is responsible for private _id.
-          example: 1
     ContactChannels:
       title: ContactChannels
-      x-examples:
-        1-phone1:
-          phone1:
-            num: '1234567890'
-        2-full:
-          email: jane@gmail.com
-          phone1:
-            country_code: '91'
-            num: '1234567890'
-            ext: '202'
-          phone2:
-            country_code: '1'
-            num: '6471112223333'
-            ext: '123'
-          address:
-            lat: 43.856573
-            lng: -79.337089
-            oneline: '101 Town Centre Blvd, Markham, ON L3R 9W3'
-            num: '101'
-            street: Town Centre Blvd
-            city: Markham
-            state: Ontario
-            country: Canada
-            postal_code: L3R9W3
       anyOf:
         - properties:
             email:
@@ -359,33 +334,6 @@ components:
             state:
               type: string
       description: 'Address extends AbstractEntity. '
-      x-examples:
-        1-min:
-          oneline: '101, Town Center Blvd, Markham, ON, Canada'
-          postalcode: L3R9W3
-        2-full:
-          oneline: '101 Town Centre BlvdMarkham, ON L3R 9W3'
-          streetnum: '101'
-          streetname: Town Centre Blvd
-          city: Markham
-          state: Ontario
-          country: Canada
-          postalcode: L3R9W3
-          lat: 43.856573
-          lng: -79.337089
-        example-3:
-          ts_created: string
-          ts_updated: string
-          id: string
-          lat: 0
-          lon: 0
-          oneline: string
-          streetnum: string
-          streetname: string
-          city: string
-          country: string
-          postalcode: string
-          state: string
     AbstractGeoEntity:
       allOf:
         - $ref: '#/components/schemas/AbstractEntity'
@@ -426,8 +374,6 @@ components:
                 $ref: '#/components/schemas/Xref'
             eventAddress:
               $ref: '#/components/schemas/PostalAddress'
-            '':
-              type: string
       description: Case
     Phone:
       title: Phone
@@ -453,11 +399,3 @@ components:
               format: date-time
       description: ''
       title: ''
-      x-examples:
-        example-1:
-          createTime: '2020-10-18T03:11:56Z'
-          updateTIme: '2020-10-18T03:11:56Z'
-          id: 1
-          xrefSystemId: string
-          xrefId: string
-          subsysRefreshTime: '2019-08-24T14:15:22Z'

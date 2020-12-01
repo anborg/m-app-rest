@@ -11,6 +11,12 @@ You can run your application in dev mode that enables live coding using:
 ./mvnw quarkus:dev
 ```
 
+for win  native
+```
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsx86_amd64.bat"
+mvn package -Pnative -DskipTests
+```
+
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.
