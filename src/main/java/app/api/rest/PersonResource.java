@@ -53,11 +53,11 @@ public class PersonResource {
         }
     }
 
-    @PATCH
-    @Path("persons")
+    @PUT
+    @Path("persons/{id}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    public Response patch(String req) throws InvalidProtocolBufferException {
+    public Response patch(@PathParam("id") Long id,String req) throws InvalidProtocolBufferException {
         System.out.println("PATCH/update Person  req=" + req);
         Optional<Model.Person> p = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
         System.out.println("PATCH/update Person  req=" + p);

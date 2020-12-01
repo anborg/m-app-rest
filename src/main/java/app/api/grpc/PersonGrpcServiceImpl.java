@@ -32,7 +32,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
 
     @Override
     public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
-        System.out.println(req);
+        System.out.println("At grpc update: pers= "+req.getId());
         Model.Person res = integSvc.update(req);
         resObs.onNext(res);//TODO handle not found
         resObs.onCompleted();
