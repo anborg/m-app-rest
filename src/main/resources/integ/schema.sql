@@ -7,7 +7,7 @@ CREATE TABLE INTEG_PERSON (
     id  INTEGER  GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) PRIMARY KEY
     , firstname VARCHAR(30)
     , lastname VARCHAR(30)
-    , email VARCHAR(20)
+    , email VARCHAR(40)
     , phone1 VARCHAR(15)
     , phone2 VARCHAR(15)
     , address_id NUMERIC(10)
@@ -48,13 +48,17 @@ insert into INTEG_ADDRESS (id, streetnum, streetname, city, country, postalcode)
  ( 1,'1001', 'My Street', 'My City', 'Canada', 'L1L0Z0')
 ,( 2,'2002', 'My Street', 'My City', 'Canada', 'L1L0Z0')
 ,( 3,'3003', 'My Street', 'My City', 'Canada', 'L1L0Z0')
+,( 6,'1', 'North Pole St', 'Antarctica', 'Canada', 'OoO0Z0')
 ;
 
 
 insert into INTEG_PERSON (id, firstname, lastname, email, phone1, phone2, address_id) values
  (1, 'Miki', 'Mouse', 'miki.mouse@gmail.com', '1111111111', '999999999',1)
 ,(2, 'Rat', 'Atouee', 'ratatouee@gmail.com', '2222222222', '999999999',2)
-,(3, 'Richard', 'Seters', 'rseters@gmail.com', '3333333333', '999999999',3)
+,(3, 'Richard', 'Seter', 'my.richy@gmail.com', '3333333333', '999999999',3)
+,(4, 'Cyber', 'Johney', 'cyber.pcc@anon.oc', null, null, null)
+,(5, 'Anamica', 'Caller', null, '55555555', null, null)
+,(6, 'Stonage', 'Frostboy', null, null, null, 6)
 ;
 
 insert into INTEG_XREF_PERSON (id, xref_sys_id, xref_person_id) values

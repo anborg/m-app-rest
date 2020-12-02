@@ -2,7 +2,7 @@ openapi: 3.0.0
 tags:
   - name: test
 info:
-  title: api-mkapp
+  title: api-mkm
   version: '1.0'
   description: API that provides interface to mkm objects. To be implemented by mkapp service
   license:
@@ -11,12 +11,14 @@ info:
     name: prem
     email: myteam@test.com
 servers:
-  - description: ''
+  - description: local
     url: 'http://localhost:8082/mkapp/rest/v1'
+  - url: 'http://wdnvmhapp11:8082/mkapp/rest/v1'
+    description: test
 paths:
   /persons:
     get:
-      summary: Person - get recent
+      summary: Person - get persons edited recently
       tags: []
       responses:
         '200':
@@ -60,7 +62,7 @@ paths:
                     postalCode: L1B 0Z0
         description: 'Mandatory for person: first/lastname and one contact. Mandatory for address: streetnum/streetname/postalcode. NO id, NO create/update timestamp '
     patch:
-      summary: Person - update
+      summary: Person - update some aspect
       operationId: patch-persons
       responses:
         '200':
@@ -103,10 +105,6 @@ paths:
                     postalCode: string
                     state: string
         description: ''
-    put:
-      summary: ''
-      operationId: put-persons
-      description: ''
   '/persons/{id}':
     parameters:
       - schema:
@@ -133,7 +131,7 @@ paths:
       description: Get one person - by id
       parameters: []
     put:
-      summary: ''
+      summary: Person - replace full (update)
       operationId: put-persons-id
       responses:
         '200':
@@ -146,7 +144,7 @@ paths:
           description: Bad Request
         '500':
           description: Internal Server Error
-      description: 'update(replace) a person, for id in path'
+      description: Replace (update) all details of person-id with supplied person details
   '/cases/{id}':
     parameters:
       - schema:
@@ -204,7 +202,7 @@ paths:
               $ref: '#/components/schemas/PostalAddress'
   /cases:
     get:
-      summary: Case - get recent
+      summary: 'Case - get recent, relevant, for e.g based on STATUS=PENDING'
       tags: []
       responses:
         '200':
@@ -312,7 +310,7 @@ components:
             postalAddress:
               $ref: '#/components/schemas/PostalAddress'
       type: object
-      description: Currently NOT used
+      description: Currently NOT USED
     PostalAddress:
       title: PostalAddress
       allOf:
@@ -375,13 +373,6 @@ components:
             eventAddress:
               $ref: '#/components/schemas/PostalAddress'
       description: Case
-    Phone:
-      title: Phone
-      type: object
-      properties:
-        id:
-          type: string
-      description: Currently NOT used.
     Xref:
       allOf:
         - $ref: '#/components/schemas/AbstractEntity'
