@@ -23,9 +23,9 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     IntegService integSvc;
 
     @Override
-    public void create(MuniService.CreatePersonReq req, StreamObserver<Model.Person> resObs) {
+    public void create(Model.Person req, StreamObserver<Model.Person> resObs) {
         //System.out.println(req);
-        final Model.Person savedPerson = integSvc.create(req.getPerson());
+        final Model.Person savedPerson = integSvc.create(req);
         resObs.onNext(Model.Person.newBuilder(savedPerson).build());
         resObs.onCompleted();
     }

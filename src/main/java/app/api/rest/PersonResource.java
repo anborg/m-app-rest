@@ -46,7 +46,7 @@ public class PersonResource {
         System.out.println("POST/insert Person  req=" + req);
         Optional<Model.Person> p = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
         if (p.isPresent() && DataQuality.Person.isValidForInsert(p.get())) {
-            Model.Person res = personSvc.create(MuniService.CreatePersonReq.newBuilder().setPerson(p.get()).build());
+            Model.Person res = personSvc.create(p.get());
             return Response.ok(res).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
