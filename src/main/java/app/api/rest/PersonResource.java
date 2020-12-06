@@ -1,7 +1,6 @@
 package app.api.rest;
 
 import com.google.protobuf.Empty;
-import com.google.protobuf.InvalidProtocolBufferException;
 import io.quarkus.grpc.runtime.annotations.GrpcService;
 import muni.model.Model;
 import muni.model.MuniService;
@@ -25,15 +24,15 @@ public class PersonResource {
 
     @GET
     @Path("persons")
-    public Response getAll() throws InvalidProtocolBufferException {
+    public Response getAll()  {
         MuniService.PersonList res = personSvc.getAll(Empty.getDefaultInstance());
         return Response.ok(res.getPersonsList()).header("X-Total-Count", res.getPersonsCount()).build();
     }
 
     @GET
     @Path("persons/{id}")
-    public Response get(@PathParam("id") Long id) throws InvalidProtocolBufferException {
-        var rpcReq = MuniService.ById.newBuilder().setId("" + id).build();
+    public Response get(@PathParam("id") Long id)  {
+        var rpcReq = MuniService.ById.newBuilder().setId(id).build();
         Model.Person res = personSvc.get(rpcReq);
         System.out.println("get obj hasId="+res.hasId());
         return res.hasId() ? Response.ok(res).build() : Response.status(Response.Status.NOT_FOUND).build();
@@ -42,11 +41,11 @@ public class PersonResource {
     @POST
     @Path("persons")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    public Response post(String req) throws InvalidProtocolBufferException {
+    public Response post(String req)  {
         System.out.println("POST/insert Person  req=" + req);
-        Optional<Model.Person> p = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
-        if (p.isPresent() && DataQuality.Person.isValidForInsert(p.get())) {
-            Model.Person res = personSvc.create(p.get());
+        Optional<Model.Person> opt = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
+        if (opt.isPresent() && DataQuality.Person.isValidForInsert(opt.get())) {
+            Model.Person res = personSvc.create(opt.get());
             return Response.ok(res).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
@@ -55,14 +54,13 @@ public class PersonResource {
 
     @PUT
     @Path("persons/{id}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    public Response patch(@PathParam("id") Long id,String req) throws InvalidProtocolBufferException {
+    public Response patch(@PathParam("id") Long id,String req)  {
         System.out.println("PATCH/update Person  req=" + req);
-        Optional<Model.Person> p = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
-        System.out.println("PATCH/update Person  req=" + p);
-        if (p.isPresent() && DataQuality.Person.isValidForUpdate(p.get())) {
-            Model.Person res = personSvc.update(p.get());
+        Optional<Model.Person> opt = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
+        System.out.println("PATCH/update Person  req=" + opt);
+        if (opt.isPresent() && DataQuality.Person.isValidForUpdate(opt.get())) {
+            Model.Person res = personSvc.update(opt.get());
             //final String json = ProtoUtil.toJson(res); //TODO tojosn not required here?
             return Response.ok(res).build();
         } else {

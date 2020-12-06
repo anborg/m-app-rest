@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 @Deprecated
 public class MockRepoImpl implements PersonRepo {
     static List<Model.Person> list = Arrays.asList(
-            MockUtil.buildPerson("1","Jane", "Doe"),
-            MockUtil.buildPerson("2","Peter", "Stock")
+            MockUtil.buildPerson(1L, "Jane", "Doe"),
+            MockUtil.buildPerson(2L, "Peter", "Stock")
     );
 
-    static Map<String, Model.Person> map = null;
+    static Map<Long, Model.Person> map = null;
 
     static{
         map = list.stream().collect(Collectors.toMap(Model.Person::getId, Function.identity()));
@@ -22,7 +22,7 @@ public class MockRepoImpl implements PersonRepo {
 
 
     @Override
-    public Optional<Model.Person> get(String id) {
+    public Optional<Model.Person> get(Long id) {
         final Model.Person out = map.get(id);
         //System.out.println( "Mock: person=" +id +" , obj= "+ out);
         return Optional.of(out);
@@ -41,7 +41,7 @@ public class MockRepoImpl implements PersonRepo {
 
     @Override
     public Model.Person save(Model.Person in) {
-        String updateId = in.getId();
+        Long updateId = in.getId();
         System.out.println("updateId = " + updateId);
         Optional<Model.Person> pExistingOpt = get(updateId);
         Model.Person pExisting = pExistingOpt.get();

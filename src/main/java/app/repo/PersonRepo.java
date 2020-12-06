@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface PersonRepo {
-    Optional<Model.Person> get(String id);
+    Optional<Model.Person> get(Long id);
 
     Collection<Model.Person> all();
     Collection<Model.Person> byAddress(Model.PostalAddress address);

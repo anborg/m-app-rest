@@ -3,7 +3,6 @@ package app.repo.appinteg;
 import app.repo.PersonRepo;
 import muni.model.Model;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -15,7 +14,7 @@ public class AppIntegRepo implements PersonRepo {
 //    AgroalDataSource dataSource;
 
     @Override
-    public Optional<Model.Person> get(String id) {
+    public Optional<Model.Person> get(Long id) {
         return null;
     }
 

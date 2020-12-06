@@ -35,6 +35,7 @@ paths:
       description: 'Get a list of persons (recently created/modified). '
     parameters: []
     post:
+      tags: []
       summary: Person - create
       operationId: post-persons
       responses:
@@ -62,6 +63,7 @@ paths:
                     postalCode: L1B 0Z0
         description: 'Mandatory for person: first/lastname and one contact. Mandatory for address: streetnum/streetname/postalcode. NO id, NO create/update timestamp '
     patch:
+      tags: []
       summary: Person - update some aspect
       operationId: patch-persons
       responses:
@@ -72,6 +74,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/Person'
               examples: {}
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
       description: Modify details of a person
       requestBody:
         content:
@@ -131,6 +137,7 @@ paths:
       description: Get one person - by id
       parameters: []
     put:
+      tags: []
       summary: Person - replace full (update)
       operationId: put-persons-id
       responses:
@@ -145,6 +152,61 @@ paths:
         '500':
           description: Internal Server Error
       description: Replace (update) all details of person-id with supplied person details
+  /cases:
+    get:
+      summary: 'Case - get recent, relevant'
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+        '500':
+          description: Internal Server Error
+      operationId: get-case
+      description: 'Get recent, relevant, for e.g based on STATUS=PENDING'
+    post:
+      tags: []
+      summary: Case - create
+      operationId: post-case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: 'Create a Case, see schema for data validation on Case object.'
+    patch:
+      tags: []
+      summary: Case - update some aspect
+      operationId: patch-case
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      description: Update some fields of Case object
   '/cases/{id}':
     parameters:
       - schema:
@@ -170,14 +232,20 @@ paths:
       operationId: get-case-id
       description: Get one case - by id
     put:
-      summary: ''
+      tags: []
+      summary: Case - replace full (update)
       operationId: put-cases-id
       responses:
         '200':
           description: OK
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
       description: Replace (update) all details of case-id with supplied case details
   /search/persons:
     post:
+      tags: []
       summary: Search - persons similar
       operationId: post-search-persons
       responses:
@@ -189,9 +257,14 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Person'
-      description: ''
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      description: 'Find persons that has similar attributes e.g firstname like, ...'
   /search/persons/byaddress:
     post:
+      tags: []
       summary: Search - person by address
       operationId: post-search-persons-byaddress
       responses:
@@ -203,51 +276,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Person'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/PostalAddress'
-  /cases:
-    get:
-      summary: 'Case - get recent, relevant, for e.g based on STATUS=PENDING'
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Case'
-      operationId: get-case
-    post:
-      summary: Case - create
-      operationId: post-case
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Case'
-    patch:
-      summary: Case - update
-      operationId: patch-case
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Case'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties: {}
+      description: Find persons that are associated with this address
 components:
   schemas:
     Person:
@@ -255,19 +293,24 @@ components:
         - $ref: '#/components/schemas/AbstractEntity'
         - type: object
           properties:
-            firstname:
+            firstName:
               type: string
-            lastname:
+            lastName:
               type: string
             email:
               type: string
               format: email
-              default: me@gmail.com
               example: me@gmail.com
+              minLength: 6
+              maxLength: 50
             phone1:
               type: string
+              minLength: 5
+              maxLength: 20
             phone2:
               type: string
+              minLength: 5
+              maxLength: 20
             address:
               $ref: '#/components/schemas/PostalAddress'
             xrefs:
@@ -275,55 +318,91 @@ components:
               items:
                 $ref: '#/components/schemas/Xref'
       title: Person
-      description: ''
-    AbstractEntity:
-      title: AbstractEntity
-      type: object
       description: |-
-        Add to this, all common fields accross "real" mkm entities. I mean 'real' as 'entities that go into separate table'. 
+        Data Constraints: 
 
-        Example scenario: 
-
-        If today 'address' is stored in CUSTOMER table, do not derive from AbstractEntity.
-
-        If in future 'address' is stored in ADDRESS table separately, then you MUST do equivalent of 'Address extends AbstractEntity'
-      properties:
-        id:
-          type: number
-          readOnly: true
-          description: Read-only. DB is responsible for private _id.
-          example: 1
-        createTime:
-          type: string
-          readOnly: true
-          description: Read-only. DB is responsible for timestamp.
-          example: '2020-10-18T03:11:56Z'
-          format: date-time
-        updateTIme:
-          type: string
-          readOnly: true
-          description: Read-only. DB is responsible for timestamp.
-          format: date-time
-          example: '2020-10-18T03:11:56Z'
-    ContactChannels:
-      title: ContactChannels
-      anyOf:
-        - properties:
-            email:
+        - {email|phone1|phone2|address} atleast one of the contact is a MUST, otherwise rejected.
+        - if address is not provided, Person will point to an AnonAddress id=0. Makes it easy to curate.
+    Case:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            status:
               type: string
-            phone1:
-              $ref: '#/components/schemas/Phone'
-            phone2:
-              $ref: '#/components/schemas/Phone'
-            postalAddress:
+              description: 'Must be controlled fixed set of states. e.g BACKLOG, AWAIT_TRIAGE, AWAIT_INTERNAL< AWAIT_EXTERNAL, TASKS_DONE, CLOSED.'
+            description:
+              type: string
+            tags:
+              type: array
+              description: 'store a list of tags that helps routing, categorizing, reporting'
+              items:
+                type: string
+            reportedByCustomer:
+              $ref: '#/components/schemas/Person'
+            createdByEmployee:
+              type: string
+              description: just user id of employee
+            xrefs:
+              type: array
+              description: A list of subsystems addressing this case
+              items:
+                $ref: '#/components/schemas/Xref'
+            address:
               $ref: '#/components/schemas/PostalAddress'
-      type: object
-      description: Currently NOT USED
+            typeId:
+              type: string
+              description: 'A unque case type id (typically a fixed enum e.g LICENCING_COMMERCIAL, LICENCING_PET, INFRA_WATER, INFRA_GAS). May be used for deptartmental routing or futher classification.'
+            typeProps:
+              type: object
+              additionalProperties: true
+              maxProperties: 30
+              minProperties: 0
+              description: 'A list of key/value json, that will be parsed by program based on specific case''s typeId'
+      description: |-
+        Case. 
+
+        typeid and typeProps are tightly interlinked
+        xrefs - represent the subsystems (or departments) where this "case" related "tasks" are executed. 
+        address - address where this case is applicable, e.g if case is about "pothole", location of nearby house, geo etc.
+
+        Constraints: 
+
+        reportedByCustomer.id - must be already present in system, if not defaults to Anon customer
+        address.id - mut be alrady present in system, if not defaults to Organization address.
+      title: Case
+    Xref:
+      allOf:
+        - $ref: '#/components/schemas/AbstractEntity'
+        - type: object
+          properties:
+            id:
+              type: integer
+              description: 'MANDATORY, Must be supplied. Please, ignore readonly as it is displayed from AbstractEntity'
+            xrefSystemId:
+              type: string
+              example: 'e.g TAXSYS, WATERSYS, AMANDA ...'
+            xrefId:
+              type: string
+              readOnly: true
+              description: id of this object in subsystem. e.g TAXSYS.Person.id
+            subsysRefreshTime:
+              type: string
+              format: date-time
+              readOnly: true
+              description: 'subsysRefreshTime, will be set by backend processes that may sync golden data to specific subsystem'
+      description: |-
+        Cross reference in subsystems where a "Person" or "Case" need to be linked/synced/queried/integrated.
+
+        Xref-for-Person entity
+        Xref-for-Case entity
+      title: Xref
     PostalAddress:
       title: PostalAddress
       allOf:
         - $ref: '#/components/schemas/AbstractGeoEntity'
         - type: object
+          description: 'Free form, single line'
           properties:
             oneline:
               type: string
@@ -339,7 +418,43 @@ components:
               type: string
             state:
               type: string
-      description: 'Address extends AbstractEntity. '
+      description: |
+        Address 
+
+        - may be a 'jurisdiction address' of a city gov, [comes from a fixed list of lookup address]
+        - may be a 'contact' postal-address of a person who lives in/out jursdiction [could be in same city/country or other]. Likely may not be parsable. Likely to use online.
+
+        Data constraints assumptions: 
+
+        - Country - if not present, assume it as same country as the organization.
+        - postalcode - MUST be present, 
+    AbstractEntity:
+      title: AbstractEntity
+      type: object
+      description: |-
+        Add to this, all common fields accross entities that are stored separate table'. 
+
+        Example scenario: 
+
+        If 'Address' is stored in CUSTOMER table, do not derive from AbstractEntity. If 'Address' is stored in ADDRESS table, then you MUST do equivalent of 'Address extends AbstractEntity'
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          description: Read-only. DB is responsible for private _id.
+          example: 1
+        createTime:
+          type: string
+          readOnly: true
+          description: Read-only. DB is responsible for timestamp.
+          example: '2020-10-18T03:11:56Z'
+          format: date-time
+        updateTime:
+          type: string
+          readOnly: true
+          description: Read-only. DB is responsible for timestamp.
+          format: date-time
+          example: '2020-10-18T03:11:56Z'
     AbstractGeoEntity:
       allOf:
         - $ref: '#/components/schemas/AbstractEntity'
@@ -348,62 +463,24 @@ components:
             lat:
               type: number
               example: 27.1751
-              default: 27.1751
+              default: 0
             lon:
               type: number
-              default: 78.0421
+              default: 0
               example: 78.0421
-      description: 'Geo coordinates. Use for any geologically identifiable entities  '
-    Case:
-      allOf:
-        - $ref: '#/components/schemas/AbstractEntity'
-        - type: object
-          properties:
-            status:
+      description: 'Geo coordinates. Use for any geologically identifiable entities. E.g lamp post location, approximate place where a tree need to be cut, a building where gas leak need to be fixed.'
+      title: AbstractGeoEntity
+    ContactChannels:
+      title: ContactChannels
+      anyOf:
+        - properties:
+            email:
               type: string
-              description: 'BACKLOG, INPROGRESS, WAITING, DONE'
-            description:
+            phone1:
               type: string
-            tags:
-              type: array
-              description: 'store a list of tags that helps routing, categorizing, reporting'
-              items:
-                type: string
-            reportedByCustomer:
-              $ref: '#/components/schemas/Person'
-            createdByEmployee:
-              $ref: '#/components/schemas/Person'
-            xrefs:
-              type: array
-              description: A list of subsystems addressing this case
-              items:
-                $ref: '#/components/schemas/Xref'
-            eventAddress:
+            phone2:
+              type: string
+            postalAddress:
               $ref: '#/components/schemas/PostalAddress'
-            typeId:
-              type: string
-              description: A unque case type id
-            typeProps:
-              type: object
-              additionalProperties: true
-              maxProperties: 30
-              minProperties: 0
-              description: 'A list of key/value json, that will be parsed by program based on specific case''s typeId'
-      description: Case
-    Xref:
-      allOf:
-        - $ref: '#/components/schemas/AbstractEntity'
-        - type: object
-          properties:
-            id:
-              type: string
-              description: 'This id is not from db, would be supplied on insert.'
-            xrefSystemId:
-              type: string
-            xrefId:
-              type: string
-            subsysRefreshTime:
-              type: string
-              format: date-time
-      description: ''
-      title: ''
+      type: object
+      description: 'Currently NOT USED. Created to express need to abstract "contact" mechanisms, so atleast one of the contact can me made as MANDATORY.'

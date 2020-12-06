@@ -47,7 +47,7 @@ public class PersonResourceTest {
     @Test
     public void personById() throws JsonProcessingException {
         //prepare an obj using data service
-        String id = "1";
+        Long id = 1L;
         Optional<Person> person = integSvc.getPerson(id);
         final var jsonExpect = ProtoUtil.toJson(person.get());
 

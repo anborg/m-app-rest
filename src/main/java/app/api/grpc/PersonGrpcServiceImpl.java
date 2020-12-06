@@ -41,7 +41,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     @Override
     public void get(MuniService.ById req, StreamObserver<Model.Person> resObs) {
         //System.out.println("PersonGrpc personById " + req);
-        String id = req.getId();
+        Long id = req.getId();
         Optional<Model.Person> res = integSvc.getPerson(id); //TODO handle not found
         if (res.isPresent()) {
             resObs.onNext(res.get());

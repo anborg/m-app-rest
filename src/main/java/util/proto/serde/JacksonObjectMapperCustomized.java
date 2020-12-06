@@ -37,7 +37,13 @@ public class JacksonObjectMapperCustomized implements ObjectMapperCustomizer {
         module.addDeserializer(MuniService.CreatePersonReq.class, new DesCreatePersonReq());
         //return param
         module.addSerializer(Model.Person.class, new SerGeneric());
+        module.addSerializer(Model.Case.class, new SerGeneric());
+        module.addSerializer(Model.PostalAddress.class, new SerGeneric());
+        module.addSerializer(Model.Xref.class, new SerGeneric());
+        module.addSerializer(Model.ErrorInfo.class, new SerGeneric());
+        module.addSerializer(Model.Organization.class, new SerGeneric());
         module.addSerializer(MuniService.SearchRes.class, new SerGeneric()); // ONE entry for all search REsponse.
+
         return module;
     }
 
