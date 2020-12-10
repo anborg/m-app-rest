@@ -6,10 +6,10 @@ import io.grpc.stub.StreamObserver;
 import muni.model.CaseServiceGrpc;
 import muni.model.Model;
 import muni.model.MuniService;
-import muni.util.MockUtil;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.Optional;
 
 @Singleton
 public class CaseGrpcServiceImpl extends CaseServiceGrpc.CaseServiceImplBase {
@@ -21,14 +21,18 @@ public class CaseGrpcServiceImpl extends CaseServiceGrpc.CaseServiceImplBase {
     public void get(MuniService.ById req, StreamObserver<Model.Case> resObs) {
         System.out.println("case.ById " + req);
         Long id = req.getId();
-        Model.Case res = MockUtil.buildCase(); // //TODO handle not found
-        resObs.onNext(res);
+        Optional<Model.Case> res = integSvc.getCase(id); // //TODO handle not found
+        if (res.isPresent()) {
+            resObs.onNext(res.get());
+        } else {
+            resObs.onNext(null);
+        }
         resObs.onCompleted();
     }
 
     @Override
     public void create(Model.Case req, StreamObserver<Model.Case> resObs) {
-        System.out.println("case.ById " + req);
+        System.out.println("Create case.ById " + req);
         Long id = req.getId();
         Model.Case res = integSvc.create(req); // //TODO handle not found
         resObs.onNext(res);
