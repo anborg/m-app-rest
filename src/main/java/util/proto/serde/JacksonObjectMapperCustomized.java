@@ -24,8 +24,6 @@ public class JacksonObjectMapperCustomized implements ObjectMapperCustomizer {
         //mapper.configure(SerializationFeature.FAIL_ON_SELF_REFERENCES, false);
 //        mapper.registerModule(new DeserializeSearchRequest());
         mapper.addMixIn(UnknownFieldSet.class, UnknownFieldSetIgnoreMixIn.class);
-
-
         mapper.registerModule(deserializerModule());
 
     }

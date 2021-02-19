@@ -1,0 +1,15 @@
+The ts must be same across
+get: db-> proto -> Json
+post: json-> proto -> db
+
+Perhaps in ProtoUtil?
+Also check if mappers can do it
+
+
+
+https://developers.google.com/protocol-buffers/docs/reference/java/index.html?com/google/protobuf/util/Timestamps.html
+com.google.protobuf.util.Timestamps
+::fromSeconds(long seconds)
+    Create a Timestamp from the number of seconds elapsed from the epoch.
+:;toSeconds(Timestamp timestamp)
+  Convert a Timestamp to the number of seconds elapsed from the epoch.
