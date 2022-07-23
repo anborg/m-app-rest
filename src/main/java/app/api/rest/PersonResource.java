@@ -1,7 +1,7 @@
 package app.api.rest;
 
 import com.google.protobuf.Empty;
-import io.quarkus.grpc.runtime.annotations.GrpcService;
+import io.quarkus.grpc.GrpcClient;
 import muni.model.Model;
 import muni.model.MuniService;
 import muni.model.PersonServiceGrpc;
@@ -19,7 +19,7 @@ import java.util.Optional;
 public class PersonResource {
 
     @Inject
-    @GrpcService("grpc-person")
+    @GrpcClient("grpc-person")
     PersonServiceGrpc.PersonServiceBlockingStub personSvc;
 
     @GET

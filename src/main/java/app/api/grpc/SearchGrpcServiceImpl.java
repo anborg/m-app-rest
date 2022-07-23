@@ -8,8 +8,9 @@ import muni.model.SearchServiceGrpc;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-
+import io.quarkus.grpc.GrpcService;
 @Singleton
+@GrpcService
 public class SearchGrpcServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
 
     @Named("integ-service")

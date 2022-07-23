@@ -17,12 +17,13 @@
     <os-maven-plugin.version>1.6.2</os-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-    <quarkus-plugin.version>2.11.0.Final</quarkus-plugin.version>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-    <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>2.11.0.Final</quarkus.platform.version>
-    <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+<!--    <my-quarkus.version>2.9.2.Final</my-quarkus.version>-->
+    <my-quarkus.version>2.11.0.Final</my-quarkus.version>
+    <quarkus-plugin.version>${my-quarkus.version}</quarkus-plugin.version>
+    <quarkus.platform.version>${my-quarkus.version}</quarkus.platform.version>
+
+    <surefire-plugin.version>2.22.2</surefire-plugin.version>
     <!-- grpc group -->
 
     <protobuf.version>3.11.1</protobuf.version>
@@ -39,6 +40,10 @@
       <artifactId>lib-integ</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
+<!--    <dependency>-->
+<!--      <groupId></groupId>-->
+<!--      <artifactId></artifactId>-->
+<!--    </dependency>-->
 
 
     <!--
@@ -47,7 +52,7 @@
     <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
-      <version>4.10.1</version>
+      <version>4.7.2</version> <!-- DO NOT CHNGE KEEP IT 4.7.2 -->
       <scope>runtime</scope>
     </dependency>
 
@@ -123,12 +128,17 @@
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
+      <version>3.23.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-testing</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-grpc</artifactId>
     </dependency>
   </dependencies>
   <build>
@@ -226,7 +236,7 @@
                 <configuration>
                   <cleanupServer>true</cleanupServer>
                   <enableHttpUrlHandler>true</enableHttpUrlHandler>
-                  <graalvmHome>${gralvm.home""}</graalvmHome>
+                  <graalvmHome>${gralvm.home}</graalvmHome>
                 </configuration>
               </execution>
             </executions>
@@ -234,7 +244,7 @@
           <plugin>
             <groupId>org.jboss.jandex</groupId>
             <artifactId>jandex-maven-plugin</artifactId>
-            <version>1.2.3</version>
+            <version>1.0.8</version>
             <executions>
               <execution>
                 <id>make-index</id>
@@ -251,8 +261,8 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>${quarkus.platform.group-id}</groupId>
-        <artifactId>${quarkus.platform.artifact-id}</artifactId>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-bom</artifactId>
         <version>${quarkus.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>

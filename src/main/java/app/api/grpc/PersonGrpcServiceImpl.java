@@ -15,8 +15,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Optional;
-
+import io.quarkus.grpc.GrpcService;
 @Singleton
+@GrpcService
 public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBase {
     //    PersonRepo repo = new MockRepoImpl();
     @Named("integ-service")

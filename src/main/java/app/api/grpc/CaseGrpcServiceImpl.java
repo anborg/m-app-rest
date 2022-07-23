@@ -3,6 +3,7 @@ package app.api.grpc;
 import access.integ.IntegService;
 import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
+import io.quarkus.grpc.GrpcService;
 import muni.model.CaseServiceGrpc;
 import muni.model.Model;
 import muni.model.MuniService;
@@ -12,6 +13,7 @@ import javax.inject.Singleton;
 import java.util.Optional;
 
 @Singleton
+@GrpcService
 public class CaseGrpcServiceImpl extends CaseServiceGrpc.CaseServiceImplBase {
 
     @Named("integ-service")

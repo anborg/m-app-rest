@@ -1,7 +1,6 @@
 package app.api.rest;
 
 import com.google.protobuf.Empty;
-import io.quarkus.grpc.runtime.annotations.GrpcService;
 import muni.model.CaseServiceGrpc;
 import muni.model.Model;
 import muni.model.MuniService;
@@ -13,12 +12,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
-
+import io.quarkus.grpc.GrpcClient;
 @Path("/mkapp/rest/v1")
 @Produces({MediaType.APPLICATION_JSON})
 public class CaseResource {
     @Inject
-    @GrpcService("grpc-case")
+    @GrpcClient("grpc-case")
     CaseServiceGrpc.CaseServiceBlockingStub caseSvc;
 
     @GET

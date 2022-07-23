@@ -1,6 +1,5 @@
 package app.grpc;
-
-import io.quarkus.grpc.runtime.annotations.GrpcService;
+import io.quarkus.grpc.GrpcClient;
 import io.quarkus.test.junit.QuarkusTest;
 import muni.model.Model;
 import muni.model.MuniService;
@@ -16,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PersonServiceGrpcTest {
 
   @Inject
-  @GrpcService("grpc-person")
+  @GrpcClient("grpc-person")
   PersonServiceGrpc.PersonServiceBlockingStub personSvc;
 
   @Test
