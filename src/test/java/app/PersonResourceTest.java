@@ -1,6 +1,7 @@
 package app;
 
 import access.integ.IntegService;
+import app.api.grpc.PersonGrpcServiceImpl;
 import app.api.rest.PersonResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,12 +14,14 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
 @TestHTTPEndpoint(PersonResource.class)
 public class PersonResourceTest {
+    private static Logger logger = Logger.getLogger(PersonResourceTest.class.getName());
     @Named("integ-service")
     IntegService integSvc;
 
@@ -40,7 +43,7 @@ public class PersonResourceTest {
                 .when().get("persons")
                 .then()
                 .statusCode(200);
-//        System.out.println(jsonOut);
+//        logger.info(jsonOut);
 //        assertEquals(mapper.readTree(jsonOut), mapper.readTree(jsonExpect));
     }
 
@@ -56,7 +59,7 @@ public class PersonResourceTest {
                 .when().get("persons/" + id)
                 .then()
                 .statusCode(200);
-        //System.out.println(jsonOut);
+        //logger.info(jsonOut);
         //assertEquals(mapper.readTree(jsonOut), mapper.readTree(jsonExpect));
     }
 

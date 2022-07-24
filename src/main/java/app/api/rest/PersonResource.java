@@ -1,5 +1,6 @@
 package app.api.rest;
 
+import app.api.grpc.PersonGrpcServiceImpl;
 import com.google.protobuf.Empty;
 import io.quarkus.grpc.GrpcClient;
 import muni.model.Model;
@@ -13,10 +14,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Path("/mkapp/rest/v1")
 @Produces({MediaType.APPLICATION_JSON})
 public class PersonResource {
+    private static Logger logger = Logger.getLogger(PersonResource.class.getName());
 
     @Inject
     @GrpcClient("grpc-person")
@@ -34,7 +37,7 @@ public class PersonResource {
     public Response get(@PathParam("id") Long id)  {
         var rpcReq = MuniService.ById.newBuilder().setId(id).build();
         Model.Person res = personSvc.get(rpcReq);
-        System.out.println("get obj hasId="+res.hasId());
+        logger.info("get obj hasId="+res.hasId());
         return res.hasId() ? Response.ok(res).build() : Response.status(Response.Status.NOT_FOUND).build();
     }
 
@@ -42,7 +45,7 @@ public class PersonResource {
     @Path("persons")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response post(String req)  {
-        System.out.println("POST/insert Person  req=" + req);
+        logger.info("POST/insert Person  req=" + req);
         Optional<Model.Person> opt = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
         if (opt.isPresent() && DataQuality.Person.isValidForInsert(opt.get())) {
             Model.Person res = personSvc.create(opt.get());
@@ -56,9 +59,9 @@ public class PersonResource {
     @Path("persons/{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response patch(@PathParam("id") Long id,String req)  {
-        System.out.println("PATCH/update Person  req=" + req);
+        logger.info("PATCH/update Person  req=" + req);
         Optional<Model.Person> opt = ProtoUtil.toProto(req, Model.Person.getDefaultInstance());
-        System.out.println("PATCH/update Person  req=" + opt);
+        logger.info("PATCH/update Person  req=" + opt);
         if (opt.isPresent() && DataQuality.Person.isValidForUpdate(opt.get())) {
             Model.Person res = personSvc.update(opt.get());
             //final String json = ProtoUtil.toJson(res); //TODO tojosn not required here?

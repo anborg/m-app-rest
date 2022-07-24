@@ -15,17 +15,20 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.Optional;
+import java.util.logging.Logger;
+
 import io.quarkus.grpc.GrpcService;
 @Singleton
 @GrpcService
 public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBase {
+    private static Logger logger = Logger.getLogger(PersonGrpcServiceImpl.class.getName());
     //    PersonRepo repo = new MockRepoImpl();
     @Named("integ-service")
     IntegService integSvc;
 
     @Override
     public void create(Model.Person req, StreamObserver<Model.Person> resObs) {
-        //System.out.println(req);
+        //logger.info(req);
         final Model.Person savedPerson = integSvc.create(req);
         resObs.onNext(Model.Person.newBuilder(savedPerson).build());
         resObs.onCompleted();
@@ -33,7 +36,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
 
     @Override
     public void update(Model.Person req, StreamObserver<Model.Person> resObs) {
-        System.out.println("At grpc update: pers= "+req.getId());
+        logger.info("At grpc update: pers= "+req.getId());
         Model.Person res = integSvc.update(req);
         resObs.onNext(res);//TODO handle not found
         resObs.onCompleted();
@@ -41,7 +44,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
 
     @Override
     public void get(MuniService.ById req, StreamObserver<Model.Person> resObs) {
-        //System.out.println("PersonGrpc personById " + req);
+        //logger.info("PersonGrpc personById " + req);
         Long id = req.getId();
         Optional<Model.Person> res = integSvc.getPerson(id); //TODO handle not found
         if (res.isPresent()) {
@@ -84,7 +87,7 @@ public class PersonGrpcServiceImpl extends PersonServiceGrpc.PersonServiceImplBa
     )
     @Override
     public void getAll(Empty req, StreamObserver<MuniService.PersonList> resObs) {
-        System.out.println(req);
+        logger.info(req.toString());
         resObs.onNext(MuniService.PersonList.newBuilder().addAllPersons(integSvc.personsRecent()).build());
         resObs.onCompleted();
     }

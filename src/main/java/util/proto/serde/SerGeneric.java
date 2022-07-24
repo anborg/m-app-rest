@@ -1,5 +1,6 @@
 package util.proto.serde;
 
+import app.api.grpc.PersonGrpcServiceImpl;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -8,14 +9,15 @@ import muni.util.ProtoUtil;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 //import com.google.protobuf.util.JsonFormat;
 
 public class SerGeneric extends JsonSerializer<Message> {
-
+    private static Logger logger = Logger.getLogger(SerGeneric.class.getName());
     @Override
     public void serialize(Message message, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-        //System.out.println("#### In SerGeneric: isIntialized=" + message.isInitialized() + ", isNullOrEmptyProto=" + Strings.isNullOrEmpty(message.toString()) + " " + message);
+        //logger.info("#### In SerGeneric: isIntialized=" + message.isInitialized() + ", isNullOrEmptyProto=" + Strings.isNullOrEmpty(message.toString()) + " " + message);
         //gen.writeRawValue(JsonFormat.printer().print(message));
         String jsonStr = ProtoUtil.toJson(message);
         if (Objects.nonNull(jsonStr)) {
