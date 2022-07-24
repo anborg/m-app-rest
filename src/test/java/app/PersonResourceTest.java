@@ -32,7 +32,7 @@ public class PersonResourceTest {
     ObjectMapper mapper = new ObjectMapper();
 
 
-//    @Test
+    //@Test
     public void personAll() throws JsonProcessingException {
         //prepare an obj using data service
         List<Person> persons = integSvc.personsRecent();

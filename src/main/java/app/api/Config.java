@@ -8,8 +8,9 @@ import io.quarkus.arc.DefaultBean;
 import muni.service.SubsystemService;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
 import javax.inject.Named;
-import javax.ws.rs.Produces;
+//import javax.ws.rs.Produces;
 
 @Dependent
 public class Config {
