@@ -18,7 +18,7 @@
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
 <!--    <my-quarkus.version>2.9.2.Final</my-quarkus.version>-->
     <my-quarkus.version>2.11.0.Final</my-quarkus.version>
-    <quarkus-plugin.version>${my-quarkus.version}</quarkus-plugin.version>
+    <quarkus-plugin.version>2.13.3.Final</quarkus-plugin.version>
     <quarkus.platform.version>${my-quarkus.version}</quarkus.platform.version>
 
     <surefire-plugin.version>2.22.2</surefire-plugin.version>
