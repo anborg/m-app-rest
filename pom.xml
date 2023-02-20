@@ -50,7 +50,7 @@
     <dependency>
       <groupId>org.antlr</groupId>
       <artifactId>antlr4-runtime</artifactId>
-      <version>4.7.2</version> <!-- DO NOT CHNGE KEEP IT 4.7.2 -->
+      <version>4.12.0</version> <!-- DO NOT CHNGE KEEP IT 4.12.0 -->
       <scope>runtime</scope>
     </dependency>
 
